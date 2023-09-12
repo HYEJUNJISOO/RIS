@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.code.mapper.Ris0101Mapper">
+	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0101DTO" >
+		SELECT HSPT_ID
+			 , LRGC_CD
+			 , LRGC_KR_NM
+			 , LRGC_ENGL_NM
+			 , LRGC_ABBR_NM
+			 , LRGC_ACPH
+			 , OTPT_SQNC
+			 , APPL_DATE
+			 , EXPR_DATE
+			 , CHRC1
+			 , CHRC2
+			 , CHRC3
+			 , CHRC4
+			 , CHRC5
+			 , NMBR1
+			 , NMBR2
+			 , NMBR3
+			 , NMBR4
+			 , NMBR5
+			 , RGST_ID
+			 , RGST_DTTM
+			 , MDFC_ID
+			 , MDFC_DTTM
+        FROM RIS0101 A
+          <if test="searchWord != null">
+          WHERE A.LRGC_CD like CONCAT('%',#{searchWord},'%')
+          </if>
+        ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
+	<insert id="insertRis0101Data" parameterType="java.util.Map" >
+		INSERT INTO RIS0101(
+		       HSPT_ID
+			 , LRGC_CD
+			 , LRGC_KR_NM
+			 , LRGC_ENGL_NM
+			 , LRGC_ABBR_NM
+			 , LRGC_ACPH
+			 , OTPT_SQNC
+			 , APPL_DATE
+			 , EXPR_DATE
+			 , CHRC1
+			 , CHRC2
+			 , CHRC3
+			 , CHRC4
+			 , CHRC5
+			 , NMBR1
+			 , NMBR2
+			 , NMBR3
+			 , NMBR4
+			 , NMBR5
+			 , RGST_ID
+			 , RGST_DTTM
+			 )
+		VALUES('A001' <!--#{hspt_id}-->
+			 , #{lrgc_cd}
+			 , #{lrgc_kr_nm}
+			 , #{lrgc_engl_nm}
+			 , #{lrgc_abbr_nm}
+			 , #{lrgc_acph}
+			 , #{otpt_sqnc}
+			 , #{appl_date}
+			 , #{expr_date}
+			 , #{chrc1}
+			 , #{chrc2}
+			 , #{chrc3}
+			 , #{chrc4}
+			 , #{chrc5}
+			 , #{nmbr1}
+			 , #{nmbr2}
+			 , #{nmbr3}
+			 , #{nmbr4}
+			 , #{nmbr5}
+			 , 'admin'
+			 , sysdate()
+			 )
+	</insert>
+	
+	<select id="codeDuplicateCheck" parameterType="String" resultType="int">
+		SELECT COUNT(1) AS cnt
+			FROM ris0101 a
+		  WHERE a.lrgc_cd = #{code}
+	</select>
+	
+	
+	
+</mapper>

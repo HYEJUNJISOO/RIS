@@ -1,0 +1,14 @@
+.leftGrid__container{
+	width: 35%;
+}
+
+.rightGrid__container{
+	width: 65%;
+}
+
+.twoGrid__box {
+  padding: 10px;
+  height: calc(100% - 49px);
+  border: 1px solid #DBDBDB;
+  border-top: 0;
+}

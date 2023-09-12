@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="egovframework.pandok.mapper.PandokMapper">
+	<select id="getRis0601List" resultType="egovframework.pandok.model.Ris0601DTO">
+		SELECT DOC_ID, TMPL_CD, IMGN_DVSN_CD, B.MDDL_KR_NM, VIEW_ABBR_NM, VIEW_TEXT
+          FROM ris0601 A
+          JOIN ris0102 B
+            ON B.LRGC_CD = "IMGN_DVSN_CD" AND A.IMGN_DVSN_CD = B.MDDL_CD
+         WHERE B.HSPT_ID = "A001";
+	</select>
+	
+	<select id="getRis0102List" resultType="egovframework.pandok.model.Ris0102DTO">
+		SELECT MDDL_CD, MDDL_KR_NM
+		  FROM ris0102
+		 WHERE HSPT_ID = "A001" AND LRGC_CD = "IMGN_DVSN_CD"; 
+	</select>
+	
+	<select id="getRisUserList" resultType="egovframework.pandok.model.RisUserDTO">
+		SELECT LOGIN_ID, LOGIN_NM
+		  FROM risuser
+		 WHERE HSPT_ID = "A001";
+	</select>
+</mapper>

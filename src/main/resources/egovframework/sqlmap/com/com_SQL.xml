@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="egovframework.com.mapper.ComMapper">
+	<select id="RisUserList" resultType="egovframework.com.model.RisUserDTO">
+		SELECT LOGIN_ID, LOGIN_NM, LOGIN_PWD, USER_GRADE, START_DATE, END_DATE, ERROR_CNT
+		FROM risuser
+	</select>
+	
+	<select id="RisPrgmList" resultType="egovframework.com.model.RisPgrmDTO">
+		SELECT SYSTEM_ID, PGRM_ID, PGRM_NAME, PGRM_URL, PGRM_TYPE, PGRM_INFO, USE_YN, END_YN
+		FROM rispgrm
+	</select>
+	
+	<select id="RisBtnList" resultType="egovframework.com.model.RisBtnDTO">
+		SELECT DATA_GUBUN, USER_GRADE, PGRM_ID, PGRM_BTN, USE_YN
+		FROM risbtn
+	</select>
+	
+	<select id="RisGrupList" resultType="egovframework.com.model.RisGrupDTO">
+		SELECT DISTINCT MENU_GROUP_ID, MENU_GROUP_NAME, OTPT_SQNC, USE_YN
+		FROM risgrup
+		ORDER BY OTPT_SQNC ASC
+	</select>
+	
+	<select id="RisGrmuList" resultType="egovframework.com.model.RisGrmuDTO">
+		SELECT MENU_ID, PGRM_ID, MENU_NAME, MENU_NAME_SUB, UPPER_MENU_ID, MENU_LEVEL, OTPT_SQNC, USE_YN
+		FROM risgrmu
+	</select>
+</mapper>

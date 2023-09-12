@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.appn.mapper.RisAppnMapper">
+	<!-- 작성자 : 송유근  -->
+	<!-- 예약 기준 관리 -->
+	
+	
+	
+	<!-- 예외 기준 관리 -->
+	<select id="ris0213FindAll" resultType="egovframework.appn.model.Ris0213DTO">
+		SELECT
+				 HSPT_ID
+				,IMGN_ROOM_CD
+				,STRT_DATE
+				,STRT_TIME
+				,END_TIME
+				,APPN_IMPS_TEXT
+				,RGST_ID
+				,RGST_DTTM
+				,MDFC_ID
+				,MDFC_DTTM
+		  FROM
+		  		 RIS0213
+	</select>
+		
+	<!-- 휴일 기준 관리 -->
+	<select id="ris0212FindAll" resultType="egovframework.appn.model.Ris0212DTO">
+		SELECT
+				 HSPT_ID
+				,HLDY_DATE
+				,HLDY_TEXT
+				,RGST_ID
+				,RGST_DTTM
+				,MDFC_ID
+				,MDFC_DTTM
+		FROM
+				RIS0212
+	</select>
+	
+	<!-- 예약 관리 -->
+	
+
+</mapper>

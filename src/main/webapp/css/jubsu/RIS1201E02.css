@@ -1,0 +1,94 @@
+.searchDaily__div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	margin-right : 50px;
+}
+
+
+.inputDateStart {
+	margin-right : 7px;
+	
+	width : 120px;
+}
+
+.inputDateEnd {	
+	margin-left : 7px;
+	margin-right : 7px;
+	
+	width : 120px;
+}
+
+.ptntNmClass {
+	margin-right : 7px;
+}
+
+.ptntNmInputClass {
+	margin-right : 7px;
+	
+	width : 140px;
+}
+
+.search::before {
+	background-image: url("../../images/icons/search.png");
+}
+
+.searchKubun__div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	margin-right : 50px;
+}
+
+.searchKubun {
+	margin-right : 7px;
+}
+
+.labelInputClass {
+	margin-right : 5px;
+}
+
+.pacsUser__div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.selectClass {
+	margin-left : 10px;
+	margin-right : 10px;
+	
+	width : 110px;
+}
+
+.pacsUserSearch {
+	margin-right : 10px;
+}
+
+.fontawesome__btn::before {
+	width: 14px;
+	height: 14px;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 14px;
+}
+
+.fontawesome__btn:hover {
+	background-color: #CFE9FF;
+}
+
+.fontawesome__btn:active {
+	color: #fff;
+	background-color: #218ECB;
+}
+
+.fontawesome__btn:active::before{	
+	color: #fff;
+}
+
+.receipt__icon::before {
+	content: "\e5a0";
+	color: #218ECB;
+}
