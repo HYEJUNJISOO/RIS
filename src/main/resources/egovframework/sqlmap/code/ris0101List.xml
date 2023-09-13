@@ -32,9 +32,10 @@
         ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
 	
+	<!--대분류 등록-->
 	<insert id="insertRis0101Data" parameterType="java.util.Map" >
 		INSERT INTO RIS0101(
-		       HSPT_ID
+		     HSPT_ID
 			 , LRGC_CD
 			 , LRGC_KR_NM
 			 , LRGC_ENGL_NM
@@ -79,6 +80,214 @@
 			 , sysdate()
 			 )
 	</insert>
+	
+	<!--중분류 등록-->
+	<insert id="insertRis0102Data" parameterType="java.util.Map" >
+		INSERT INTO RIS0102 (
+				, HSPT_ID
+				, LRGC_CD
+				, MDDL_CD
+				, MDDL_KR_NM
+				, MDDL_ENGL_NM
+				, MDDL_ABBR_NM
+				, MDDL_ACPH
+				, OTPT_SQNC
+				, APPL_DATE
+				, EXPR_DATE
+				, CHRC1
+				, CHRC2
+				, CHRC3
+				, CHRC4
+				, CHRC5
+				, NMBR1
+				, NMBR2
+				, NMBR3
+				, NMBR4
+				, NMBR5
+				, RGST_ID
+					RGST_DTTM
+				 )
+		VALUES( #{hspt_id}
+				, #{mddl_cd}
+				, #{mddl_kr_nm}
+				, #{mddl_engl_nm}
+				, #{mddl_abbr_nm}
+				, #{mddl_acph}
+				, #{otpt_sqnc}
+				, #{appl_date}
+				, #{expr_date}
+				, #{chrc1}
+				, #{chrc2}
+				, #{chrc3}
+				, #{chrc4}
+				, #{chrc5}
+				, #{nmbr1}
+				, #{nmbr2}
+				, #{nmbr3}
+				, #{nmbr4}
+				, #{nmbr5}
+				, 'admin'
+				, sysdate()
+				)
+	</insert>
+	
+	<!--소분류 등록-->
+	<insert id="insertRis0103Data" parameterType="java.util.Map" >
+		INSERT INTO RIS0103 (
+					, HSPT_ID
+					, LRGC_CD
+					, MDDL_CD
+					, SMLL_CD
+					, SMLL_KR_NM
+					, SMLL_ENGL_NM
+					, SMLL_ABBR_NM
+					, OTPT_SQNC
+					, APPL_DATE
+					, EXPR_DATE
+					, CHRC1
+					, CHRC2
+					, CHRC3
+					, CHRC4
+					, CHRC5
+					, NMBR1
+					, NMBR2
+					, NMBR3
+					, NMBR4
+					, NMBR5
+					, RGST_ID
+					, RGST_DTTM
+				)
+		VALUES( #{hspt_id}
+				,	#{lrgc_id}
+				, #{mddl_cd}
+				, #{smll_cd}
+				, #{smll_kr_nm}
+				, #{smll_engl_nm}
+				, #{smll_abbr_nm}
+				, #{otpt_sqnc}
+				, #{appl_date}
+				, #{expr_date}
+				, #{chrc1}
+				, #{chrc2}
+				, #{chrc3}
+				, #{chrc4}
+				, #{chrc5}
+				, #{nmbr1}
+				, #{nmbr2}
+				, #{nmbr3}
+				, #{nmbr4}
+				, #{nmbr5}
+				, 'admin'
+				, sysdate()
+				)
+	</insert>
+	
+	<!--대분류코드 수정-->
+	<update id="updateRis0101Data">
+		UPDATE  RIS0101 SET
+		<if test='lrgc_kr_nm != null'>LRGC_KR_NM = #{lrgc_kr_nm},</if>
+		<if test='lrgc_engl_nm != null'>LRGC_ENGL_NM = #{lrgc_engl_nm},</if>
+		<if test='lrgc_abbr_nm != null'>LRGC_ABBR_NM = #{lrgc_abbr_nm},</if>
+		<if test='lrgc_acph != null'>LRGC_ACPH = #{lrgc_acph},</if>
+		<if test='otpt_sqnc != null'>OTPT_SQNC = #{otpt_sqnc},</if>
+		<if test='appl_date != null'>APPL_DATE = #{appl_date},</if>
+		<if test='expr_date != null'>EXPR_DATE = #{expr_date},</if>
+		<if test='chrc1 != null'>CHRC1 = #{chrc1},</if>
+		<if test='chrc2 != null'>CHRC2 = #{chrc2},</if>
+		<if test='chrc3 != null'>CHRC3 = #{chrc3},</if>
+		<if test='chrc4 != null'>CHRC4 = #{chrc4},</if>
+		<if test='chrc5 != null'>CHRC5 = #{chrc5},</if>
+		<if test='nmbr1 != null'>NMBR1 = #{nmbr1},</if>
+		<if test='nmbr2 != null'>NMBR2 = #{nmbr2},</if>
+		<if test='nmbr3 != null'>NMBR3 = #{nmbr3},</if>
+		<if test='nmbr4 != null'>NMBR4 = #{nmbr4},</if>
+		<if test='nmbr5 != null'>NMBR5 = #{nmbr5},</if>
+		MDFC_ID = #{mdfc_id},
+		MDFC_DTTM = #{mdfc_dttm}
+		WHERE  HSPT_ID = #{hspt_id}
+		  AND	 LRGC_CD = #{lrgc_cd}
+	</update>
+	
+	<!--중분류코드 수정-->
+	<update id="updateRis0102Data">
+		UPDATE  RIS0101 SET
+		<if test='mddl_kr_nm != null'>MDDL_KR_NM = #{mddl_kr_nm},</if>
+		<if test='mddl_engl_nm != null'>MDDL_ENGL_NM = #{mddl_engl_nm},</if>
+		<if test='mddl_abbr_nm != null'>MDDL_ABBR_NM = #{mddl_abbr_nm},</if>
+		<if test='mddl_acph != null'>MDDL_ACPH = #{mddl_acph},</if>
+		<if test='otpt_sqnc != null'>OTPT_SQNC = #{otpt_sqnc},</if>
+		<if test='appl_date != null'>APPL_DATE = #{appl_date},</if>
+		<if test='expr_date != null'>EXPR_DATE = #{expr_date},</if>
+		<if test='chrc1 != null'>CHRC1 = #{chrc1},</if>
+		<if test='chrc2 != null'>CHRC2 = #{chrc2},</if>
+		<if test='chrc3 != null'>CHRC3 = #{chrc3},</if>
+		<if test='chrc4 != null'>CHRC4 = #{chrc4},</if>
+		<if test='chrc5 != null'>CHRC5 = #{chrc5},</if>
+		<if test='nmbr1 != null'>NMBR1 = #{nmbr1},</if>
+		<if test='nmbr2 != null'>NMBR2 = #{nmbr2},</if>
+		<if test='nmbr3 != null'>NMBR3 = #{nmbr3},</if>
+		<if test='nmbr4 != null'>NMBR4 = #{nmbr4},</if>
+		<if test='nmbr5 != null'>NMBR5 = #{nmbr5},</if>
+		MDFC_ID = #{mdfc_id},
+		MDFC_DTTM = #{mdfc_dttm}
+		WHERE  HSPT_ID = #{hspt_id}
+		AND	 LRGC_CD = #{lrgc_cd}
+		AND	 MDDL_CD = #{mddl_cd}
+	</update>
+	
+	<!--소분류코드 수정-->
+	<update id="updateRis0103Data">
+		UPDATE  RIS0103 SET
+		<if test='smll_kr_nm != null'>SMLL_KR_NM = #{smll_kr_nm},</if>
+		<if test='smll_engl_nm != null'>SMLL_ENGL_NM = #{smll_engl_nm},</if>
+		<if test='smll_abbr_nm != null'>SMLL_ABBR_NM = #{smll_abbr_nm},</if>
+		<if test='otpt_sqnc != null'>OTPT_SQNC = #{otpt_sqnc},</if>
+		<if test='appl_date != null'>APPL_DATE = #{appl_date},</if>
+		<if test='expr_date != null'>EXPR_DATE = #{expr_date},</if>
+		<if test='chrc1 != null'>CHRC1 = #{chrc1},</if>
+		<if test='chrc2 != null'>CHRC2 = #{chrc2},</if>
+		<if test='chrc3 != null'>CHRC3 = #{chrc3},</if>
+		<if test='chrc4 != null'>CHRC4 = #{chrc4},</if>
+		<if test='chrc5 != null'>CHRC5 = #{chrc5},</if>
+		<if test='nmbr1 != null'>NMBR1 = #{nmbr1},</if>
+		<if test='nmbr2 != null'>NMBR2 = #{nmbr2},</if>
+		<if test='nmbr3 != null'>NMBR3 = #{nmbr3},</if>
+		<if test='nmbr4 != null'>NMBR4 = #{nmbr4},</if>
+		<if test='nmbr5 != null'>NMBR5 = #{nmbr5},</if>
+		MDFC_ID = #{mdfc_id},
+		MDFC_DTTM = #{mdfc_dttm}
+		WHERE  HSPT_ID = #{hspt_id}
+		AND	 LRGC_CD = #{lrgc_cd}
+		AND	 MDDL_CD = #{mddl_cd}
+		AND	 SMLL_CD = #{smml_cd}
+	</update>
+	
+	<!--대분류코드 삭제-->
+	<delete id="deleteRis0101Data">
+		DELETE
+		 FROM  RIS0101
+		WHERE  HSPT_ID = #{hspt_id}
+			AND	 LRGC_CD = #{lrgc_cd}
+	</delete>
+	
+	<!--중분류코드 삭제-->
+	<delete id="deleteRis0102Data">
+		DELETE
+		FROM  RIS0102
+		WHERE  HSPT_ID = #{hspt_id}
+			AND	 LRGC_CD = #{lrgc_cd}
+			AND	 MDDL_CD = #{mddl_cd}
+	</delete>
+	
+	<!--소분류코드 삭제-->
+	<delete id="deleteRis0103Data">
+		DELETE
+		FROM  RIS0103
+		WHERE  HSPT_ID = #{hspt_id}
+			AND	 LRGC_CD = #{lrgc_cd}
+			AND	 MDDL_CD = #{mddl_cd}
+			AND	 SMLL_CD = #{smll_cd}
+	</delete>
 	
 	<select id="codeDuplicateCheck" parameterType="String" resultType="int">
 		SELECT COUNT(1) AS cnt
