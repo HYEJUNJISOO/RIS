@@ -138,11 +138,11 @@
           data: jsonData,
           colNames: ["HSPT_ID", "대분류코드", "대분류 한글명", "자릿수", "출력순", "적용일자", "불용일자"],
           colModel: [
-            { name: "hsptId", index: "hsptId", width: 90, align: "center" },
+            { name: "hsptId", index: "hsptId", width: 50, align: "center" },
             { name: "lrgcCd", index: "lrgcCd", width: 150, align: "center" },
             { name: "lrgcKrNm", index: "lrgcKrNm", width: 100, align: "center" },
-            { name: "lrgcAcph", index: "lrgcAcph", width: 150,align: "center"},
-            { name: "otptSqnc", index: "otptSqnc", width: 80, align: "center" },
+            { name: "lrgcAcph", index: "lrgcAcph", width: 60,align: "center"},
+            { name: "otptSqnc", index: "otptSqnc", width: 60, align: "center" },
             { name: "applDate", index: "applDate", width: 80, align: "center" },
             { name: "exprDate", index: "exprDate", width: 80, align: "center" },
           ],
@@ -201,13 +201,13 @@
 
         $("#list2").jqGrid({
             datatype: "local",
-			url : "/risCodeList2.do", // 중분류 리스트 조회
-			reordercolNames: true, //컬럼명을 드래그하여 재정렬할 수 있는 기능을 활성화
-			postData: { 
-				type     : "DCList2", //그리드 데이터를 요청할때 함께 보낼 파라미터 설정
-				isSearch : "false", // 화면 처음 로딩 시 검색여부 boolean 값(=false)
-			}, // 보낼 파라미터
-			mtype    : 'POST', // 전송 타입
+            url : "/risCodeList2.do", // 중분류 리스트 조회
+            reordercolNames: true, //컬럼명을 드래그하여 재정렬할 수 있는 기능을 활성화
+            postData: {
+              type     : "DCList2", //그리드 데이터를 요청할때 함께 보낼 파라미터 설정
+              isSearch : "false", // 화면 처음 로딩 시 검색여부 boolean 값(=false)
+            }, // 보낼 파라미터
+            mtype    : 'POST', // 전송 타입
             colNames: ["HSPT_ID", "대분류코드", "중분류코드", "중분류 한글명", "자릿수", "출력순", "적용일자", "불용일자"],
             colModel: [
             	{ name: "hsptId", index: "hsptId", width: 90, align: "center" },
