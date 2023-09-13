@@ -15,8 +15,8 @@
             <li class="main__menu-items">
                 기준정보관리
                 <div class="sub__menu-item">
-                    <a href="#">공통코드관리</a>
-                    <a href="#">기준정보 입력관리</a>
+                    <a href="/RIS0101E00.do">공통코드관리</a>
+                    <a href="/RIS0102E00.do">기준정보 입력관리</a>
                     <a href="#">촬영실 관리</a>
                     <a href="#">촬영실 장비관리</a>
                     <a href="#">촬영코드 관리</a>
