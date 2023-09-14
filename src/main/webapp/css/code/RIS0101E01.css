@@ -559,7 +559,7 @@ ul.twoDepth__menu-items li:first-child{
     outline-style: none;
 } 
 .ui-jqgrid-view {
-	height:99%;
+	/*height:99%;*/
 }
 table {
     border-collapse: collapse;
