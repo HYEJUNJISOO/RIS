@@ -40,6 +40,7 @@ public class CodeController {
 	@RequestMapping(value = "/RIS0101E00.do")
 	public String RIS0101E00(Model model, Map<String, Object> requestMap) throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
+		System.out.println("requestMap :::"+requestMap);
 		List<Ris0101DTO> list = ris0101Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		
 		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
@@ -50,8 +51,14 @@ public class CodeController {
 
 	// 공통코드 상세화면
 	@RequestMapping(value = "/RIS0101E01.do")
-	public String RIS0101E01(Model model) throws Exception {
-//		List<Ris0101DTO> list = ris0101Service.findAll();
+	public String RIS0101E01(Model model, Map<String, Object> requestMap) throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		System.out.println("requestMap222 :::"+requestMap);
+		List<Ris0101DTO> list = ris0101Service.findAll(requestMap);
+
+		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
+
+		model.addAttribute("data", jsonString);
 		return ".main/code/RIS0101E01";
 	}
 
@@ -77,6 +84,7 @@ public class CodeController {
 	@RequestMapping(value = "/risCodeList2.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject risCodeList2(@RequestParam Map<String, Object> requestMap) throws Exception {
+		System.out.println("requestMapT :::"+requestMap);
 		JSONObject json = new JSONObject();
 		List<Ris0102DTO> list = ris0102Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		json.put("rows", list);

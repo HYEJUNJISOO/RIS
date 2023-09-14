@@ -32,6 +32,15 @@
         ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
 	
+	<select id="findRis0102ListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0101DTO" >
+		SELECT *
+		FROM RIS0102 A
+		<if test="searchWord != null">
+			WHERE A.LRGC_CD like CONCAT('%',#{searchWord},'%')
+		</if>
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
 	<!--대분류 등록-->
 	<insert id="insertRis0101Data" parameterType="java.util.Map" >
 		INSERT INTO RIS0101(

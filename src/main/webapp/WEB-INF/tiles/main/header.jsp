@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/grid.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+	<script type="text/javascript" src='/js/jquery/common.js'></script>
 	<script type="text/javascript" src='<c:url value='/js/jqgrid/jqgrid_common.js'/>'></script>
 	<script type="text/javascript" src='<c:url value='/js/jqgrid/jquery-1.9.0.min.js'/>'></script>
 	<script type="text/javascript" src='<c:url value='/js/jqgrid/jquery.jqGrid.min.js'/>'></script>
