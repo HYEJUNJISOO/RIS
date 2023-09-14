@@ -1,0 +1,366 @@
+@import
+	url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap")
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
+
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	font-family: 'Nanum Gothic', sans-serif !important;
+	border: 0;
+	box-sizing: border-box;
+}
+
+/* 버튼 */
+.all__btn {
+    display: flex;
+    padding: 7px 10px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    background: #FFF;
+    position: relative;
+    font-size: 14px;
+}
+
+.all__btn:hover {
+    cursor: pointer;
+    background: #E8E8E8;
+}
+
+.img__btn {
+    padding-left: 26px;
+}
+
+.img__btn::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.fontawesome__btn::before {
+    width: 14px;
+    height: 14px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.fontawesome__btn:hover {
+    background-color: #CFE9FF;
+}
+
+.fontawesome__btn:active {
+    color: #fff;
+    background-color: #218ECB;
+}
+
+.fontawesome__btn:active::before {
+    color: #fff;
+}
+
+.detail__btn::before {
+	background-image: url("/images/icons/detail.png");
+}
+
+.insert__btn::before {
+    background-image: url("/images/icons/insert2.png");
+}
+
+.search__btn::before {
+    background-image: url("/images/icons/search2.png");
+}
+
+.search__icon::before {
+    content: "\f002";
+    color: #218ECB;
+}
+
+.update__icon::before {
+    content: "\f304";
+    color: #218ECB;
+}
+
+.insert__icon::before {
+    content: "\2b";
+    color: #00A932;
+}
+
+.delete__icon::before {
+    content: "\f00d";
+    color: #f00d;
+}
+
+.save__icon::before {
+    content: "\f0c7";
+    color: #218ECB;
+}
+
+.rotate__icon::before {
+	content: "\f2f1";
+	color: #999;
+}
+
+.list__icon::before {
+	content: "\f03a";
+	color: #218ECB;
+}
+
+
+.all__header {
+	min-width: 1200px;
+}
+
+.header__flex {
+	padding: 5px 20px;
+	display: flex;
+	width: 100%;
+	height: 65px;
+	align-items: center;
+	background-color: #E3F2FF;
+	min-width: 1200px;
+}
+
+.logo-img {
+	width: 170px;
+}
+
+ul {
+	display: flex;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	background-color: #E3F2FF;
+}
+
+.main__menu-items:hover {
+	cursor: pointer;
+}
+
+.main__menu-items {
+	position: relative;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	color: #005D92;
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none;
+	width: 150px;
+	height: 50px;
+	opacity: 1;
+}
+
+.sub__menu-item {
+	display: none;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	background-color: #E3F2FF;
+	min-width: 150px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.sub__menu-item a {
+	color: #005D92;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	font-size: 10px;
+}
+
+.sub__menu-item a:hover {
+	cursor: pointer;
+	background-color: #96B9D7;
+}
+
+.main__menu-items:hover .sub__menu-item {
+	display: block;
+}
+
+/* 언어, 유저 정보 */
+.header__user {
+	padding: 3px 20px;
+	background-color: #96B9D7;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	font-size: 12px;
+	align-items: center;
+}
+
+.sel {
+	margin-right: 10px;
+}
+
+.user {
+	margin-right: 2px;
+}
+
+.key-img {
+	width: 16px
+}
+
+/* 그리드 아래 크기 변경 부분 */
+.ui-jqgrid-resize,
+.ui-jqgrid-resize-mark {
+  display: none;
+}
+
+/* 그리드 헤드 테이블 */
+.ui-jqgrid .ui-jqgrid-htable {
+  color: #333333;
+  background-color: #ececec;
+  border-top: 2px solid #999;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+/* 그리드 헤드 th */
+.ui-jqgrid .ui-jqgrid-htable th {
+  height: 30px;
+}
+
+/* 그리드 헤드 셀 */
+.ui-state-default {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  border-right: 1px solid #dbdbdb;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.ui-jqgrid-hbox {
+  background-color: #ffffff;
+}
+
+.ui-widget-content {
+  background: #fcfdfd;
+  color: #333;
+}
+
+.ui-jqgrid .ui-jqgrid-bdiv {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  text-align: left;
+  height: 99%;
+  width: 100% !important;
+}
+
+.ui-jqgrid tr.ui-row-ltr td {
+  text-align: left;
+  border-right: 1px solid #dbdbdb;
+}
+
+.ui-jqgrid tr.jqgrow td {
+  overflow: hidden;
+  height: 30px;
+  padding: 6px 3px;
+  border-bottom: 1px solid #dbdbdb;
+  font-size: 12px;
+}
+
+.inquiry__page-flex input[type="text"],
+.inquiry__page-flex input[type="date"],
+.inquiry__page-flex select {
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 24px;
+  padding-left: 5px;
+}
+
+.grid1 {
+  width: 100%;
+}
+
+.grid2 {
+  height: 50%;
+}
+
+.grid3 {
+  height: 50%;
+}
+
+.grid4 {
+  width: 50%;
+}
+
+.ui-widget.ui-widget-content {
+  position: relative;
+}
+
+.ui-jqgrid .loading {
+  display: none;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin: 5px;
+  padding: 6px;
+  text-align: center;
+  font-size: 12px;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+}
+
+/* 그리드 데이터 로드 텍스트 스타일 */
+.ui-state-active, .ui-widget-content .ui-state-active {
+  background: #fff;
+  font-weight: bold;
+  color: #000;
+}
+
+.ui-jqgrid .jqgrid-overlay {
+  display: none;
+  z-index: 100;
+}
+
+/* 그리드 행 호버 시 */
+.ui-jqgrid-bdiv .ui-state-hover,
+.ui-widget-header .ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  color: #333333;
+  background: #c6e4f9;
+}
+
+/* 그리드 행 선택 시 */
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+  color: #fff;
+  background: #218ecb;
+  font-weight: bold;
+}
+
+.ui-jqgrid-sortable {
+  position: relative;
+}
+
+.grid__title {
+  display: flex;
+  align-items: center;
+}
+
+.detail__btn {
+  margin-right: 470px; 
+}
+
+.detail__btn, .insert__btn {
+   width: auto; /* 넓이를 자동으로 조정하도록 설정 */
+ }

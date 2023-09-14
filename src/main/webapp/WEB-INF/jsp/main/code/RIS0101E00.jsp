@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공통코드관리</title>
+<link rel="stylesheet" type="text/css" href="/css/code/RIS0101E00.css"/>
 </head>
   <body>
     <main class="main__container">
@@ -24,14 +25,12 @@
         <div class="twoGrid__container">
           <!-- 그리드 타이틀 -->
           <div class="grid__title">
-            <p>
-            	대분류 코드&nbsp;
-            	<button id="lrgcDetail">상세</button>
-            </p>
-
+            <p>대분류 코드</p>
+            	<button class="all__btn img__btn img__btn detail__btn" id="lrgcDetail">상세</button> 
+            
             <!-- 버튼 컨테이너 -->
             <div class="btn__container">
-              <button id="lrgcReg">입력</button>
+              <button class="all__btn img__btn insert__btn" id="lrgcReg">입력</button>
             </div>
           </div>
           <!-- 그리드 -->
