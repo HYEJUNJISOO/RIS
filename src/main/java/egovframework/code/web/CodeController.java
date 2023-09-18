@@ -51,12 +51,22 @@ public class CodeController {
 
 	// 공통코드 상세화면
 	@RequestMapping(value = "/RIS0101E01.do")
-	public String RIS0101E01(Model model, Map<String, Object> requestMap) throws Exception {
+	public String RIS0101E01(Model model,
+	 	@RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
+		@RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd,
+		Map<String, Object> requestMap) throws Exception {
+
 		ObjectMapper objectMapper = new ObjectMapper();
-		System.out.println("requestMap222 :::"+requestMap);
-		List<Ris0101DTO> list = ris0101Service.findAll(requestMap);
+		requestMap.put("hspt_id",hsptId);
+		requestMap.put("lrgc_cd",lrgcCd);
+
+		System.out.println("requestMap :::"+requestMap);
+		List<Ris0101DTO> list = ris0101Service.findOne(requestMap);
 
 		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
+		System.out.println("jsonString1 :::"+jsonString);
+		jsonString = jsonString.replaceAll("[\\['\\]]","");
+		System.out.println("jsonString2 :::"+jsonString);
 
 		model.addAttribute("data", jsonString);
 		return ".main/code/RIS0101E01";

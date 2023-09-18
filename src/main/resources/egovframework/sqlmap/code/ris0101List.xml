@@ -32,6 +32,14 @@
         ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
 	
+	<select id="findListOne" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0101DTO" >
+		SELECT *
+		 FROM RIS0101 A
+		WHERE A.LRGC_CD = #{lrgc_cd}
+		  AND A.HSPT_ID = #{hspt_id}
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
 	<select id="findRis0102ListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0101DTO" >
 		SELECT *
 		FROM RIS0102 A

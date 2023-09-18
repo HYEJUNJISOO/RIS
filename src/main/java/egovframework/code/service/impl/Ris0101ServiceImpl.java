@@ -21,6 +21,11 @@ public class Ris0101ServiceImpl implements Ris0101Service{
 	public List<Ris0101DTO> findAll(Map<String, Object> requestMap) {
 		return ris0101Mapper.findListAll(requestMap);
 	}
+
+	@Override
+	public List<Ris0101DTO> findOne(Map<String, Object> requestMap) {
+		return ris0101Mapper.findListOne(requestMap);
+	}
 	/*대분류 등록,수정,삭제*/
 	@Override
 	public int insertRis0101Data(Map<String, Object> requestMap) { return ris0101Mapper.insertRis0101Data(requestMap); }
