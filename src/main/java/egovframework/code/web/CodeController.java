@@ -63,11 +63,14 @@ public class CodeController {
 		System.out.println("requestMap :::"+requestMap);
 		List<Ris0101DTO> list = ris0101Service.findOne(requestMap);
 
-		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
-		System.out.println("jsonString1 :::"+jsonString);
-		jsonString = jsonString.replaceAll("[\\['\\]]","");
-		System.out.println("jsonString2 :::"+jsonString);
+		requestMap.put("hsptId",requestMap.get("hspt_id"));
+		requestMap.put("lrgcCd",requestMap.get("lrgc_cd"));
+		List<Ris0102DTO> list2 = ris0102Service.findAll(requestMap);
 
+		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
+		jsonString = jsonString.replaceAll("[\\['\\]]","");
+
+		model.addAttribute("resultList", list);
 		model.addAttribute("data", jsonString);
 		return ".main/code/RIS0101E01";
 	}
@@ -93,8 +96,14 @@ public class CodeController {
 	// 공통코드 중분류 리스트
 	@RequestMapping(value = "/risCodeList2.do", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject risCodeList2(@RequestParam Map<String, Object> requestMap) throws Exception {
-		System.out.println("requestMapT :::"+requestMap);
+	public JSONObject risCodeList2(@RequestParam Map<String, Object> requestMap,
+	    @RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
+	    @RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd
+		) throws Exception {
+		requestMap.put("hsptId",hsptId);
+		requestMap.put("lrgcCd",lrgcCd);
+		System.out.println("requestMap2 :::"+requestMap);
+
 		JSONObject json = new JSONObject();
 		List<Ris0102DTO> list = ris0102Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		json.put("rows", list);
@@ -116,7 +125,15 @@ public class CodeController {
 	// 공통코드 소분류 리스트
 	@RequestMapping(value = "/risCodeList3.do", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject risCodeList3(@RequestParam Map<String, Object> requestMap) throws Exception {
+	public JSONObject risCodeList3(@RequestParam Map<String, Object> requestMap,
+    @RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
+   	@RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd,
+    @RequestParam(value="mddlCd", required=false, defaultValue="") String mddlCd
+	) throws Exception {
+		requestMap.put("hsptId",hsptId);
+		requestMap.put("lrgcCd",lrgcCd);
+		requestMap.put("mddlCd",mddlCd);
+		System.out.println("requestMap3 :::"+requestMap);
 		JSONObject json = new JSONObject();
 		List<Ris0103DTO> list = ris0103Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		json.put("rows", list);
@@ -130,6 +147,16 @@ public class CodeController {
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
 		int result = ris0101Service.insertRis0101Data(requestMap); // 대분류 코드 리스트 데이터
+
+		return json;
+	}
+
+	@RequestMapping(value = "/risCodeUpdateData.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject risCodeUpdateData(@RequestBody Map<String, Object> requestMap) throws Exception {
+		JSONObject json = new JSONObject();
+		json.put("result", "true");
+		int result = ris0101Service.updateRis0101Data(requestMap); // 대분류 코드 리스트 데이터
 
 		return json;
 	}

@@ -279,6 +279,7 @@
         //alert(index+'/'+idxcol+'/'+sortorder);
       },
     });
+
     $("#list3").jqGrid({
       datatype: "local",
       url : "/risCodeList3.do", // 중분류 리스트 조회
