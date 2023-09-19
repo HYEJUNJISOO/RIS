@@ -5,6 +5,7 @@
 		SELECT HSPT_ID
 			 , LRGC_CD
 			 , MDDL_CD
+			 , SMLL_CD
 			 , SMLL_KR_NM
 			 , SMLL_ENGL_NM
 			 , SMLL_ABBR_NM

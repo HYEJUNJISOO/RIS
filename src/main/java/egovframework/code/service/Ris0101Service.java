@@ -9,7 +9,6 @@ public interface Ris0101Service {
 	public List<Ris0101DTO> findAll(Map<String, Object> requestMap);
 
 	public List<Ris0101DTO> findOne(Map<String, Object> requestMap);
-	/*Map<String, Object> selectSmsAddressMemList(Ris0101DTO vo) throws Exception;*/
 
 	/*대분류 등록,수정,삭제*/
 	public int insertRis0101Data(Map<String, Object> requestMap);
