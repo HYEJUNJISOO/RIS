@@ -675,7 +675,7 @@
 				var lrgc_acph = $("#lrgc_acph").val();
 				var ids = $("#list").getDataIDs();
 				var rowid = Math.max.apply(null,ids)+1 // 페이징 처리 시 현 페이지의 Max RowId 값
-				var rowData ={iud:"I", lrgc_cd:lrgc_cd, mddl_acph:20,otpt_sqnc:0, appl_date:currdate, expr_date:"3000-01-01"};	// 기본값 셋팅
+				var rowData ={iud:"I", lrgcCd:lrgc_cd, mddlAcph:20,otptSqnc:0, applDate:currdate, exprDate:"3000-01-01"};	// 기본값 셋팅
 				if(lrgc_acph == 0 && checkLMS == "L"){	// 자릿수가 0이면 행추가 X
 					alert(i18n.message_059);  //"이 코드의 추가적인 하위코드를 입력할 수 없습니다."
 					return;
@@ -692,9 +692,9 @@
 				if(checkLMS == "L" && LMS == "S"){
 					mddlid = $("#list").getGridParam("selrow");		// 중분류 선택된 rowid
 					rowObject = $("#list").jqGrid('getRowData',mddlid);	// 선택된 중분류의 값을 받아오기 위함
-					mddl_cd = rowObject.mddl_cd;
-					mddl_acph = rowObject.mddl_acph;
-					mddl_expr_date = rowObject.expr_date;
+					mddl_cd = rowObject.mddlCd;
+					mddl_acph = rowObject.mddlAcph;
+					mddl_expr_date = rowObject.exprDate;
 
 				}
 				/* 상세보기 코드가 불용이면 하위코드에는 행 추가 불가*/
@@ -708,7 +708,7 @@
 					return
 				}
 
-				var rowData2 ={iud:"I", lrgc_cd:lrgc_cd,otpt_sqnc:0, mddl_cd:mddl_cd, appl_date:currdate, expr_date:"3000-01-01"};
+				var rowData2 ={iud:"I", lrgcCd:lrgc_cd,otptSqnc:0, mddlCd:mddl_cd, applDate:currdate, exprDate:"3000-01-01"};
 				// 중분류
 				if(LMS == "M"){
 					for(var i in ids2){
@@ -921,7 +921,6 @@
 				// 소분류
 				var ids2 = $("#list2").getDataIDs();
 
-
 				// 중분류
 				if(LMS == "M"){
 
@@ -993,10 +992,9 @@
 							}
 						}
 
-						console.log(iud);
 						if(iud == "I"){
 							jQuery('#list').jqGrid('editRow',ids[i],false);
-							fn_reset()
+							fn_reset();
 
 							document.savefrm.lrgc_cd.value =lrgc_cd;
 							document.savefrm.mddl_cd.value =mddl_cd;
@@ -1048,24 +1046,26 @@
 						var appl_date = $('#list').getCell(ids[i], "applDate");
 						var expr_date = $('#list').getCell(ids[i], "exprDate");
 
-						fn_reset()
+						fn_reset();
 
-						document.savefrm.iud.value 			=iud;
-						document.savefrm.lrgc_cd.value 		=lrgc_cd;
-						document.savefrm.mddl_cd.value 		=mddl_cd;
-						document.savefrm.mddl_kr_nm.value 	=mddl_kr_nm;
-						document.savefrm.mddl_acph.value	=mddl_acph;
-						document.savefrm.otpt_sqnc.value 	=otpt_sqnc;
-						document.savefrm.appl_date.value 	=appl_date;
-						document.savefrm.expr_date.value 	=expr_date;
+						document.savefrm.iud.value=iud;
+						document.savefrm.lrgc_cd.value=lrgc_cd;
+						document.savefrm.mddl_cd.value=mddl_cd;
+						document.savefrm.mddl_kr_nm.value=mddl_kr_nm;
+						document.savefrm.mddl_acph.value=mddl_acph;
+						document.savefrm.otpt_sqnc.value=otpt_sqnc;
+						document.savefrm.appl_date.value=appl_date;
+						document.savefrm.expr_date.value=expr_date;
 
-						var authok = $("form[name='savefrm']").serialize();
-
+						var authok = $("form[name='savefrm']").serializeObject();
+						console.log("formData json >>>" + JSON.stringify(formData));
+						console.log(222);
+						console.log(authok);
 						if(iud == "I"){
 							$.ajax({
 								type : "post",
 								url : "/risCodeInsertData.do?checkLMS="+LMS,
-								data : authok,
+								data : JSON.stringify(authok),
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"

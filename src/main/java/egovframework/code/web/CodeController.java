@@ -88,6 +88,8 @@ public class CodeController {
 			int result = ris0101Service.insertRis0102Data(requestMap);
 		}else if("S".equals(checkLMS)){
 			int result = ris0101Service.insertRis0103Data(requestMap);
+		}else{
+			int result = ris0101Service.insertRis0101Data(requestMap);
 		}
 
 		return json;
