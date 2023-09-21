@@ -40,26 +40,24 @@ public class Ris0101ServiceImpl implements Ris0101Service{
 
 	/*중분류 등록,수정,삭제*/
 	@Override
-	public int insertRis0102Data(Map<String, Object> requestMap) { return ris0101Mapper.insertRis0101Data(requestMap); }
+	public int insertRis0102Data(Map<String, Object> requestMap) { return ris0101Mapper.insertRis0102Data(requestMap); }
 	@Override
-	public int updateRis0102Data(Map<String, Object> requestMap) {
-		return ris0101Mapper.updateRis0101Data(requestMap);
-	}
+	public int updateRis0102Data(Map<String, Object> requestMap) { return ris0101Mapper.updateRis0102Data(requestMap); }
 	@Override
 	public int deleteRis0102Data(Map<String, Object> requestMap) {
-		return ris0101Mapper.deleteRis0101Data(requestMap);
+		return ris0101Mapper.deleteRis0102Data(requestMap);
 	}
 
 	/*소분류 등록,수정,삭제*/
 	@Override
-	public int insertRis0103Data(Map<String, Object> requestMap) { return ris0101Mapper.insertRis0101Data(requestMap); }
+	public int insertRis0103Data(Map<String, Object> requestMap) { return ris0101Mapper.insertRis0103Data(requestMap); }
 	@Override
 	public int updateRis0103Data(Map<String, Object> requestMap) {
-		return ris0101Mapper.updateRis0101Data(requestMap);
+		return ris0101Mapper.updateRis0103Data(requestMap);
 	}
 	@Override
 	public int deleteRis0103Data(Map<String, Object> requestMap) {
-		return ris0101Mapper.deleteRis0101Data(requestMap);
+		return ris0101Mapper.deleteRis0103Data(requestMap);
 	}
 
 	@Override

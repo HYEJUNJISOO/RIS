@@ -8,11 +8,13 @@
 <meta charset="UTF-8">
 <title>코드상세</title>
 <link rel="stylesheet" type="text/css" href="/css/code/RIS0101E01.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
 	<body>
 	<form commandName="VO" id="savefrm" name="savefrm" method="post">
 		<input type="hidden" name="iud"      	  value=""/>
 		<input type="hidden" name="checkLMS"      value=""/>
+		<input type="hidden" name="hspt_id"       value=""/>
 		<input type="hidden" name="lrgc_cd"       value=""/>
 		<input type="hidden" name="mddl_cd"       value=""/>
 		<input type="hidden" name="smll_cd"       value=""/>
@@ -38,7 +40,7 @@
 					</a>
 				</div>
 				<div class="box__flex">
-					<a href="javascript:fn_update();" class="ml-2">
+					<a href="javascript:fn_update('L');" class="ml-2">
 						<button class="all__btn img__btn img__btn update__btn">수정</button>
 					</a>
 					<a href="javascript:fn_expr('D');" class="ml-2">
@@ -886,14 +888,24 @@
 					// 상세 데이터
 				}else if(LMS == "D"){
 					var checkLMS = $("#checkLMS").val();
+					var hspt_id = $("#hspt_id").val();
 					var lrgc_cd = $("#lrgc_cd").val();
 					var mddl_cd = $("#mddl_cd").val();
 					var smll_cd = $("#smll_cd").val();
 					var expr_date = $("#expr_date").val();
+					console.log(1111);
+
+					var param = '';
+					param = {"checkLMS":checkLMS,"hspt_id":hspt_id,"lrgc_cd":lrgc_cd,"mddl_cd":mddl_cd,"smll_cd":smll_cd};
+					param = JSON.stringify(param);
+
 					if(confirm(i18n.message_060)){ //"정말 불용 처리 하시겠습니까?"
 						$.ajax({
 							type : "post",
-							url : "/risCodeUpdateData.do?checkLMS="+checkLMS + "&iud=D&lrgc_cd="+lrgc_cd+"&mddl_cd="+mddl_cd+"&smll_cd="+smll_cd,
+							url : "/risCodeUpdateData.do?checkLMS="+checkLMS,
+							data : param,
+							dataType : "json",
+							contentType : "application/json; charset=UTF-8",
 							async : false,
 							error : function(){
 								alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -923,14 +935,12 @@
 
 				// 중분류
 				if(LMS == "M"){
-
 					for(var i in ids2){
 						var iud = $('#list2').getCell(ids2[i], "iud");
 						if(iud == "I" || iud == "U" || iud == "D"){
 							alert(i18n.message_057); //"소분류 코드 등록/수정중인 정보가 있습니다.\n저장 후 다시 시도해주세요."
 							return
 						}
-
 					}
 					for(var i in ids){
 
@@ -996,6 +1006,7 @@
 							jQuery('#list').jqGrid('editRow',ids[i],false);
 							fn_reset();
 
+							document.savefrm.hspt_id.value =jsonData.hsptId;
 							document.savefrm.lrgc_cd.value =lrgc_cd;
 							document.savefrm.mddl_cd.value =mddl_cd;
 							document.savefrm.mddl_kr_nm.value =mddl_kr_nm;
@@ -1004,12 +1015,14 @@
 							document.savefrm.appl_date.value =appl_date;
 							document.savefrm.expr_date.value =expr_date;
 
-							var authok = $("form[name='savefrm']").serialize();
-
+							var authok = $("form[name='savefrm']").serializeObject();
+							authok = JSON.stringify(authok);
 							$.ajax({
 								type : "post",
-								url : "/risCodeInsertData.do?checkLMS="+LMS+"&codeCheck=Y",
+								url : "/risCodeInsertData.do?checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -1049,6 +1062,7 @@
 						fn_reset();
 
 						document.savefrm.iud.value=iud;
+						document.savefrm.hspt_id.value=jsonData.hsptId;
 						document.savefrm.lrgc_cd.value=lrgc_cd;
 						document.savefrm.mddl_cd.value=mddl_cd;
 						document.savefrm.mddl_kr_nm.value=mddl_kr_nm;
@@ -1058,14 +1072,14 @@
 						document.savefrm.expr_date.value=expr_date;
 
 						var authok = $("form[name='savefrm']").serializeObject();
-						console.log("formData json >>>" + JSON.stringify(formData));
-						console.log(222);
-						console.log(authok);
+						authok = JSON.stringify(authok);
 						if(iud == "I"){
 							$.ajax({
 								type : "post",
 								url : "/risCodeInsertData.do?checkLMS="+LMS,
-								data : JSON.stringify(authok),
+								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -1083,11 +1097,12 @@
 							});
 
 						}else if(iud == "U" || iud == "D"){
-
 							$.ajax({
 								type : "post",
 								url : "/risCodeUpdateData.do?searchstatus=V&checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -1182,6 +1197,7 @@
 							jQuery('#list2').jqGrid('editRow',ids2[i],false);
 							fn_reset();
 
+							document.savefrm.hspt_id.value=jsonData.hsptId;
 							document.savefrm.lrgc_cd.value =lrgc_cd;
 							document.savefrm.mddl_cd.value =mddl_cd;
 							document.savefrm.smll_cd.value =smll_cd;
@@ -1190,12 +1206,15 @@
 							document.savefrm.appl_date.value =appl_date;
 							document.savefrm.expr_date.value =expr_date;
 
-							var authok = $("form[name='savefrm']").serialize();
+							var authok = $("form[name='savefrm']").serializeObject();
+							authok = JSON.stringify(authok);
 
 							$.ajax({
 								type : "post",
-								url : "/risCodeInsertData.do?checkLMS="+LMS+"&codeCheck=Y",
+								url : "/risCodeInsertData.do?checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -1203,7 +1222,7 @@
 								success : function(data) {
 									if(data.error_code == "8"){
 										jQuery('#list').jqGrid('editRow',ids2[i] ,false);
-										alert(i18n.message_062.replace("X",(parseInt(i)+1)).replace("Y",mddl_cd)); //(parseInt(i)+1) + "번 행에\n[ " +mddl_cd + " ] : 코드는 중복되는 코드입니다.\n다른 코드를 사용해주세요."
+										alert(i18n.message_062.replace("X",(parseInt(i)+1)).replace("Y",mddlCd)); //(parseInt(i)+1) + "번 행에\n[ " +mddl_cd + " ] : 코드는 중복되는 코드입니다.\n다른 코드를 사용해주세요."
 										codeCheck = "N"
 										$("#list").jqGrid('setSelection', ids2[i], true);
 									}
@@ -1219,8 +1238,8 @@
 							jQuery('#list2').editRow(ids2[i]);
 							jQuery("#list2").setColProp('smllCd', { editable: true });
 						}
-
 					}// for end
+
 					for(var i in ids2){
 						$("#list2").jqGrid('saveRow',ids2[i]);
 						var iud = $('#list2').getCell(ids2[i], "iud");
@@ -1235,7 +1254,8 @@
 						fn_reset();
 
 						document.savefrm.iud.value 			=	iud;
-						document.savefrm.lrgc_cd.value 		=	lrgc_cd;
+						document.savefrm.hspt_id.value    = jsonData.hsptId;
+						document.savefrm.lrgc_cd.value 		=	$('#list').getCell(ids2[i], "lrgcCd");
 						document.savefrm.mddl_cd.value 		=	mddl_cd;
 						document.savefrm.smll_cd.value 		=	smll_cd;
 						document.savefrm.smll_kr_nm.value 	=	smll_kr_nm;
@@ -1243,14 +1263,15 @@
 						document.savefrm.appl_date.value 	=	appl_date;
 						document.savefrm.expr_date.value 	=	expr_date;
 
-						var authok = $("form[name='savefrm']").serialize();
-
+						var authok = $("form[name='savefrm']").serializeObject();
+						authok = JSON.stringify(authok);
 						if(iud == "I"){
-
 							$.ajax({
 								type : "post",
 								url : "/risCodeInsertData.do?checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -1262,13 +1283,13 @@
 									}
 								}
 							});
-
 						}else if(iud == "U" || iud == "D"){
-
 							$.ajax({
 								type : "post",
-								url : "/risCodeUpdateData.do?use_yn=N&checkLMS="+LMS,
+								url : "/risCodeUpdateData.do?checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								async : false,
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -1293,30 +1314,23 @@
 
 			//초기화
 			function fn_reset(){
-
 				document.savefrm.iud.value						="";
-
 				document.savefrm.lrgc_cd.value					="";
-
 				document.savefrm.mddl_cd.value					="";
 				document.savefrm.mddl_kr_nm.value				="";
 				document.savefrm.mddl_acph.value				="";
-
 				document.savefrm.smll_cd.value					="";
 				document.savefrm.smll_kr_nm.value				="";
-
 				document.savefrm.otpt_sqnc.value				="";
 				document.savefrm.appl_date.value				="";
 				document.savefrm.appl_date.value				="";
 				document.savefrm.expr_date.value				="";
-
 			}
 
 			//행 삭제
 			function fn_delete(LMS){
 				var iudcnt = 0;	// 등록,수정중인 행 갯수
 				var q_user_id = $("#q_user_id").val();
-
 				// 중분류
 				var rowid = $("#list").getGridParam( "selrow" );
 				var ids = $("#list").getDataIDs();
@@ -1353,14 +1367,21 @@
 					if(confirm(i18n.message_066)){ //"정말 삭제하시겠습니까?"
 
 						var checkLMS = $("#checkLMS").val();
+						var hspt_id = $("#hspt_id").val();
 						var lrgc_cd = $("#lrgc_cd").val();
 						var mddl_cd = $("#mddl_cd").val();
 						var smll_cd = $("#smll_cd").val();
 						var expr_date = $("#expr_date").val();
 
+						var param = '';
+						param = {"checkLMS":checkLMS,"hspt_id":hspt_id,"lrgc_cd":lrgc_cd,"mddl_cd":mddl_cd,"smll_cd":smll_cd};
+						param = JSON.stringify(param);
 						$.ajax({
 							type : "post",
-							url : "/risCodeDeleteData.do?checkLMS="+checkLMS+"&lrgc_cd="+lrgc_cd+"&mddl_cd="+mddl_cd+"&smll_cd="+smll_cd+"&currdate="+currdate+"&q_user_id="+q_user_id,
+							url : "/risCodeDeleteData.do?checkLMS="+checkLMS,
+							data : param,
+							dataType : "json",
+							contentType : "application/json; charset=UTF-8",
 							error : function(){
 								alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
 							},
@@ -1405,16 +1426,19 @@
 						if(confirm(i18n.message_066)){ //"정말 삭제하시겠습니까?"
 							fn_reset();
 
+							document.savefrm.hspt_id.value  = $('#list').getCell(rowid, "hsptId");
 							document.savefrm.lrgc_cd.value  = $('#list').getCell(rowid, "lrgcCd");
 							document.savefrm.mddl_cd.value  = $('#list').getCell(rowid, "mddlCd");
 							document.savefrm.checkLMS.value = LMS;
 
-							var authok = $("form[name='savefrm']").serialize();
-
+							var authok = $("form[name='savefrm']").serializeObject();
+							authok = JSON.stringify(authok);
 							$.ajax({
 								type : "post",
-								url : "/risCodeDeleteData.do",
+								url : "/risCodeDeleteData.do?checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
 								},
@@ -1430,9 +1454,7 @@
 						}else{
 							return
 						}
-
 					}else{
-
 						if(iud == "I"){
 							$("#list").jqGrid("delRowData", rowid); // 행 삭제
 							jQuery('#list').jqGrid('editRow',rowid,false);
@@ -1475,26 +1497,23 @@
 					}
 
 					if(iudcnt < 1){
-
 						var expr_date = $('#list2').getCell(rowid2, "exprDate");
-
-
-
-
 						if(confirm(i18n.message_066)){ //"정말 삭제하시겠습니까?"
-
 							fn_reset();
-							document.savefrm.lrgc_cd.value  = $('#list2').getCell(rowid2, "lrgcCd");
+							document.savefrm.hspt_id.value  = $('#list').getCell(rowid, "hsptId");
+							document.savefrm.lrgc_cd.value  = $('#list').getCell(rowid, "lrgcCd");
 							document.savefrm.mddl_cd.value  = $('#list2').getCell(rowid2, "mddlCd");
 							document.savefrm.smll_cd.value  = $('#list2').getCell(rowid2, "smllCd");
 							document.savefrm.checkLMS.value = LMS;
 
-							var authok = $("form[name='savefrm']").serialize();
-
+							var authok = $("form[name='savefrm']").serializeObject();
+							authok = JSON.stringify(authok);
 							$.ajax({
 								type : "post",
-								url : "/risCodeDeleteData.do",
+								url : "/risCodeDeleteData.do?checkLMS="+LMS,
 								data : authok,
+								dataType : "json",
+								contentType : "application/json; charset=UTF-8",
 								error : function(){
 									alert(i18n.message_045); // "[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
 								},
@@ -1541,7 +1560,7 @@
 
 
 			/* 수정페이지 이동 */
-			function fn_update(){
+			function fn_update(LMS){
 				var iudcnt = 0;	// 등록,수정 행 갯수
 
 				var ids = $("#list").getDataIDs();
@@ -1561,14 +1580,14 @@
 				}
 				if(iudcnt > 0 ){
 					if(confirm(i18n.message_069)){ //"등록/수정중인 정보가 있습니다.\n무시하고 이동하시겠습니까?"
-						document.regfrm.action = "/risCodeUpdateData.do";
+						document.regfrm.action = "/RIS0101E02.do?checkLMS="+LMS;
 						document.regfrm.submit();
 					}else{
 						return;
 					}
 
 				}else{
-					document.regfrm.action = "/risCodeUpdateData.do";
+					document.regfrm.action = "/RIS0101E02.do?checkLMS="+LMS;
 					document.regfrm.submit();
 				}
 			}

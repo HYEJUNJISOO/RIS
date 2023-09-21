@@ -40,7 +40,6 @@ public class CodeController {
 	@RequestMapping(value = "/RIS0101E00.do")
 	public String RIS0101E00(Model model, Map<String, Object> requestMap) throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
-		System.out.println("requestMap :::"+requestMap);
 		List<Ris0101DTO> list = ris0101Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		
 		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
@@ -60,7 +59,6 @@ public class CodeController {
 		requestMap.put("hspt_id",hsptId);
 		requestMap.put("lrgc_cd",lrgcCd);
 
-		System.out.println("requestMap :::"+requestMap);
 		List<Ris0101DTO> list = ris0101Service.findOne(requestMap);
 
 		requestMap.put("hsptId",requestMap.get("hspt_id"));
@@ -79,45 +77,38 @@ public class CodeController {
 	public JSONObject risCodeInsertData(@RequestBody Map<String, Object> requestMap,
 		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS
 		) throws Exception {
+		System.out.println("INSERT requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
-		System.out.println("requestMap Insert :::"+requestMap);
+		int result = 0;
 		if("L".equals(checkLMS)){
-			int result = ris0101Service.insertRis0101Data(requestMap);
+			result = ris0101Service.insertRis0101Data(requestMap);
 		}else if("M".equals(checkLMS)){
-			int result = ris0101Service.insertRis0102Data(requestMap);
+			result = ris0101Service.insertRis0102Data(requestMap);
 		}else if("S".equals(checkLMS)){
-			int result = ris0101Service.insertRis0103Data(requestMap);
-		}else{
-			int result = ris0101Service.insertRis0101Data(requestMap);
+			result = ris0101Service.insertRis0103Data(requestMap);
 		}
-
+		json.put("error_code", 0);
 		return json;
 	}
 
 	@RequestMapping(value = "/risCodeUpdateData.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject risCodeUpdateData(@RequestBody Map<String, Object> requestMap,
-		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS,
-		@RequestParam(value="iud", required=false, defaultValue="") String iud,
-		@RequestParam(value="lrgc_cd", required=false, defaultValue="") String lrgc_cd,
-		@RequestParam(value="mddl_cd", required=false, defaultValue="") String mddl_cd,
-		@RequestParam(value="smll_cd", required=false, defaultValue="") String smll_cd
+		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS
 		) throws Exception {
+		System.out.println("UPDATE requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
-		System.out.println("requestMap Update :::"+requestMap);
-		System.out.println("iud :::"+iud);
-		System.out.println("lrgc_cd :::"+lrgc_cd);
-		System.out.println("mddl_cd :::"+mddl_cd);
-		System.out.println("smll_cd :::"+smll_cd);
+		int result = 0;
 		if("L".equals(checkLMS)){
-			int result = ris0101Service.updateRis0101Data(requestMap);
+			result = ris0101Service.updateRis0101Data(requestMap);
 		}else if("M".equals(checkLMS)){
-			int result = ris0101Service.updateRis0102Data(requestMap);
+			result = ris0101Service.updateRis0102Data(requestMap);
 		}else if("S".equals(checkLMS)){
-			int result = ris0101Service.updateRis0103Data(requestMap);
+			result = ris0101Service.updateRis0103Data(requestMap);
 		}
+		json.put("error_code", 0);
 		return json;
 	}
 
@@ -125,25 +116,23 @@ public class CodeController {
 	@ResponseBody
 	public JSONObject risCodeDeleteData(@RequestBody Map<String, Object> requestMap,
 		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS,
-		@RequestParam(value="iud", required=false, defaultValue="") String iud,
 		@RequestParam(value="lrgc_cd", required=false, defaultValue="") String lrgc_cd,
 		@RequestParam(value="mddl_cd", required=false, defaultValue="") String mddl_cd,
 		@RequestParam(value="smll_cd", required=false, defaultValue="") String smll_cd
 		) throws Exception {
+		System.out.println("DELETE requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
-		System.out.println("requestMap Delete :::"+requestMap);
-		System.out.println("iud :::"+iud);
-		System.out.println("lrgc_cd :::"+lrgc_cd);
-		System.out.println("mddl_cd :::"+mddl_cd);
-		System.out.println("smll_cd :::"+smll_cd);
+		int result = 0;
 		if("L".equals(checkLMS)){
-			int result = ris0101Service.deleteRis0101Data(requestMap);
+			result = ris0101Service.deleteRis0101Data(requestMap);
 		}else if("M".equals(checkLMS)){
-			int result = ris0101Service.deleteRis0102Data(requestMap);
+			result = ris0101Service.deleteRis0102Data(requestMap);
 		}else if("S".equals(checkLMS)){
-			int result = ris0101Service.deleteRis0103Data(requestMap);
+			result = ris0101Service.deleteRis0103Data(requestMap);
 		}
+		json.put("error_code", 0);
+
 		return json;
 	}
 
@@ -176,7 +165,6 @@ public class CodeController {
 		) throws Exception {
 		requestMap.put("hsptId",hsptId);
 		requestMap.put("lrgcCd",lrgcCd);
-		System.out.println("requestMap2 :::"+requestMap);
 
 		JSONObject json = new JSONObject();
 		List<Ris0102DTO> list = ris0102Service.findAll(requestMap); // 대분류 코드 리스트 데이터
@@ -203,7 +191,6 @@ public class CodeController {
 		requestMap.put("hsptId",requestMap.get("hspt_id"));
 		requestMap.put("lrgcCd",requestMap.get("lrgc_cd"));
 		requestMap.put("mddlCd",requestMap.get("mddl_cd"));
-		System.out.println("requestMap3 :::"+requestMap);
 		JSONObject json = new JSONObject();
 		List<Ris0103DTO> list = ris0103Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		json.put("rows", list);

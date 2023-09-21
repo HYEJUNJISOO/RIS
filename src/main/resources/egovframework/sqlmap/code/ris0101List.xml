@@ -101,7 +101,7 @@
 	<!--중분류 등록-->
 	<insert id="insertRis0102Data" parameterType="java.util.Map" >
 		INSERT INTO RIS0102 (
-				, HSPT_ID
+				  HSPT_ID
 				, LRGC_CD
 				, MDDL_CD
 				, MDDL_KR_NM
@@ -122,9 +122,10 @@
 				, NMBR4
 				, NMBR5
 				, RGST_ID
-					RGST_DTTM
+				,	RGST_DTTM
 				 )
 		VALUES( #{hspt_id}
+				, #{lrgc_cd}
 				, #{mddl_cd}
 				, #{mddl_kr_nm}
 				, #{mddl_engl_nm}
@@ -151,7 +152,7 @@
 	<!--소분류 등록-->
 	<insert id="insertRis0103Data" parameterType="java.util.Map" >
 		INSERT INTO RIS0103 (
-					, HSPT_ID
+					  HSPT_ID
 					, LRGC_CD
 					, MDDL_CD
 					, SMLL_CD
@@ -175,7 +176,7 @@
 					, RGST_DTTM
 				)
 		VALUES( #{hspt_id}
-				,	#{lrgc_id}
+				,	#{lrgc_cd}
 				, #{mddl_cd}
 				, #{smll_cd}
 				, #{smll_kr_nm}
@@ -220,14 +221,14 @@
 		<if test='nmbr4 != null'>NMBR4 = #{nmbr4},</if>
 		<if test='nmbr5 != null'>NMBR5 = #{nmbr5},</if>
 		MDFC_ID = #{mdfc_id},
-		MDFC_DTTM = #{mdfc_dttm}
+		MDFC_DTTM = sysdate()
 		WHERE  HSPT_ID = #{hspt_id}
 		  AND	 LRGC_CD = #{lrgc_cd}
 	</update>
 	
 	<!--중분류코드 수정-->
 	<update id="updateRis0102Data">
-		UPDATE  RIS0101 SET
+		UPDATE  RIS0102 SET
 		<if test='mddl_kr_nm != null'>MDDL_KR_NM = #{mddl_kr_nm},</if>
 		<if test='mddl_engl_nm != null'>MDDL_ENGL_NM = #{mddl_engl_nm},</if>
 		<if test='mddl_abbr_nm != null'>MDDL_ABBR_NM = #{mddl_abbr_nm},</if>
@@ -246,7 +247,7 @@
 		<if test='nmbr4 != null'>NMBR4 = #{nmbr4},</if>
 		<if test='nmbr5 != null'>NMBR5 = #{nmbr5},</if>
 		MDFC_ID = #{mdfc_id},
-		MDFC_DTTM = #{mdfc_dttm}
+		MDFC_DTTM = sysdate()
 		WHERE  HSPT_ID = #{hspt_id}
 		AND	 LRGC_CD = #{lrgc_cd}
 		AND	 MDDL_CD = #{mddl_cd}
@@ -272,11 +273,11 @@
 		<if test='nmbr4 != null'>NMBR4 = #{nmbr4},</if>
 		<if test='nmbr5 != null'>NMBR5 = #{nmbr5},</if>
 		MDFC_ID = #{mdfc_id},
-		MDFC_DTTM = #{mdfc_dttm}
+		MDFC_DTTM = sysdate()
 		WHERE  HSPT_ID = #{hspt_id}
 		AND	 LRGC_CD = #{lrgc_cd}
 		AND	 MDDL_CD = #{mddl_cd}
-		AND	 SMLL_CD = #{smml_cd}
+		AND	 SMLL_CD = #{smll_cd}
 	</update>
 	
 	<!--대분류코드 삭제-->
