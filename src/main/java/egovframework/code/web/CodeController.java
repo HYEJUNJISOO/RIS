@@ -81,11 +81,11 @@ public class CodeController {
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
 		int result = 0;
-		if("L".equals(checkLMS)){
+		if("L".equals(checkLMS) && "I".equals(requestMap.get("iud"))){
 			result = ris0101Service.insertRis0101Data(requestMap);
-		}else if("M".equals(checkLMS)){
+		}else if("M".equals(checkLMS) && "I".equals(requestMap.get("iud"))){
 			result = ris0101Service.insertRis0102Data(requestMap);
-		}else if("S".equals(checkLMS)){
+		}else if("S".equals(checkLMS) && "I".equals(requestMap.get("iud"))){
 			result = ris0101Service.insertRis0103Data(requestMap);
 		}
 		json.put("error_code", 0);
@@ -101,11 +101,11 @@ public class CodeController {
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
 		int result = 0;
-		if("L".equals(checkLMS)){
+		if("L".equals(checkLMS) && "U".equals(requestMap.get("iud"))){
 			result = ris0101Service.updateRis0101Data(requestMap);
-		}else if("M".equals(checkLMS)){
+		}else if("M".equals(checkLMS) && "U".equals(requestMap.get("iud"))){
 			result = ris0101Service.updateRis0102Data(requestMap);
-		}else if("S".equals(checkLMS)){
+		}else if("S".equals(checkLMS) && "U".equals(requestMap.get("iud"))){
 			result = ris0101Service.updateRis0103Data(requestMap);
 		}
 		json.put("error_code", 0);
