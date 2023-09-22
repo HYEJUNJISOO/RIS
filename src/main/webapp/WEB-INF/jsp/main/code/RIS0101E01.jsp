@@ -893,7 +893,6 @@
 					var mddl_cd = $("#mddl_cd").val();
 					var smll_cd = $("#smll_cd").val();
 					var expr_date = $("#expr_date").val();
-					console.log(1111);
 
 					var param = '';
 					param = {"checkLMS":checkLMS,"hspt_id":hspt_id,"lrgc_cd":lrgc_cd,"mddl_cd":mddl_cd,"smll_cd":smll_cd};
