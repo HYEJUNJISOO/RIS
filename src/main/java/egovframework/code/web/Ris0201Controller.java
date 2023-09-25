@@ -1,6 +1,5 @@
 package egovframework.code.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import egovframework.code.model.Ris0101DTO;
 import egovframework.code.model.Ris0102DTO;
 import egovframework.code.model.Ris0103DTO;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class Ris0109Controller {
+public class Ris0201Controller {
 	@Resource(name="ris0101Service")
 	private Ris0101Service ris0101Service;
 
@@ -27,10 +26,10 @@ public class Ris0109Controller {
 	@Resource(name="ris0103Service")
 	private Ris0103Service ris0103Service;
 
-	// 기준정보입력관리 리스트
-	@RequestMapping(value = "/RIS0109E00.do")
-	public String RIS0109E00(Model model) throws Exception {
-		return ".main/code/RIS0109E00";
+	// 촬영코드관리 리스트
+	@RequestMapping(value = "/RIS0201E00.do")
+	public String RIS0201E00(Model model) throws Exception {
+		return ".main/code/RIS0201E00";
 	}
 
 }

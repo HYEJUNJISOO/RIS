@@ -1,3 +1,4 @@
+/*
 package egovframework.code.web;
 
 import java.util.List;
@@ -211,3 +212,4 @@ public class CodeController {
 	
 }
 
+*/

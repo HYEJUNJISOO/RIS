@@ -26,15 +26,15 @@ public class Ris0101Controller {
 
 	@Resource(name="ris0103Service")
 	private Ris0103Service ris0103Service;
-	
+
 	// 공통코드 리스트
 	@RequestMapping(value = "/RIS0101E00.do")
 	public String RIS0101E00(Model model, Map<String, Object> requestMap) throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Ris0101DTO> list = ris0101Service.findAll(requestMap); // 대분류 코드 리스트 데이터
-		
+
 		String jsonString = objectMapper.writeValueAsString(list); // 리스트 to json String
-		
+
 		model.addAttribute("data", jsonString);
 		return ".main/code/RIS0101E00";
 	}
@@ -42,9 +42,9 @@ public class Ris0101Controller {
 	// 공통코드 상세화면
 	@RequestMapping(value = "/RIS0101E01.do")
 	public String RIS0101E01(Model model,
-	 	@RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
-		@RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd,
-		Map<String, Object> requestMap) throws Exception {
+							 @RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
+							 @RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd,
+							 Map<String, Object> requestMap) throws Exception {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		requestMap.put("hspt_id",hsptId);
@@ -63,11 +63,12 @@ public class Ris0101Controller {
 		return ".main/code/RIS0101E01";
 	}
 
+	// 공통코드 상세화면 등록
 	@RequestMapping(value = "/risCodeInsertData.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject risCodeInsertData(@RequestBody Map<String, Object> requestMap,
-		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS
-		) throws Exception {
+										@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS
+	) throws Exception {
 		System.out.println("INSERT requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
@@ -83,11 +84,12 @@ public class Ris0101Controller {
 		return json;
 	}
 
+	// 공통코드 상세화면 수정
 	@RequestMapping(value = "/risCodeUpdateData.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject risCodeUpdateData(@RequestBody Map<String, Object> requestMap,
-		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS
-		) throws Exception {
+										@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS
+	) throws Exception {
 		System.out.println("UPDATE requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
@@ -103,14 +105,15 @@ public class Ris0101Controller {
 		return json;
 	}
 
+	// 공통코드 상세화면 삭제
 	@RequestMapping(value = "/risCodeDeleteData.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject risCodeDeleteData(@RequestBody Map<String, Object> requestMap,
-		@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS,
-		@RequestParam(value="lrgc_cd", required=false, defaultValue="") String lrgc_cd,
-		@RequestParam(value="mddl_cd", required=false, defaultValue="") String mddl_cd,
-		@RequestParam(value="smll_cd", required=false, defaultValue="") String smll_cd
-		) throws Exception {
+										@RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS,
+										@RequestParam(value="lrgc_cd", required=false, defaultValue="") String lrgc_cd,
+										@RequestParam(value="mddl_cd", required=false, defaultValue="") String mddl_cd,
+										@RequestParam(value="smll_cd", required=false, defaultValue="") String smll_cd
+	) throws Exception {
 		System.out.println("DELETE requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
@@ -127,33 +130,19 @@ public class Ris0101Controller {
 		return json;
 	}
 
-
-
 	// 공통코드 등록화면
 	@RequestMapping(value = "/RIS0101E02.do")
 	public String RIS0101E02(Model model) throws Exception {
 		return ".main/code/RIS0101E02";
 	}
-	
-	// ?
-	@RequestMapping(value = "/RIS0109E00.do")
-	public String RIS0109E00(Model model) throws Exception {
-		return ".main/code/RIS0109E00";
-	}
-	
-	//촬영실 관리화면
-	@RequestMapping(value = "/RIS0102E00.do")
-	public String RIS0102E00(Model model) throws Exception {
-		return ".main/code/RIS0102E00";
-	}
-	
+
 	// 공통코드 중분류 리스트
 	@RequestMapping(value = "/risCodeList2.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject risCodeList2(@RequestParam Map<String, Object> requestMap,
-	    @RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
-	    @RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd
-		) throws Exception {
+								   @RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
+								   @RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd
+	) throws Exception {
 		requestMap.put("hsptId",hsptId);
 		requestMap.put("lrgcCd",lrgcCd);
 
@@ -163,7 +152,7 @@ public class Ris0101Controller {
 		System.out.println("json2 :::"+json);
 		return json;
 	}
-	
+
 	// 공통코드 소분류 리스트
 	@RequestMapping(value = "/risCodeList1Search.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -187,9 +176,8 @@ public class Ris0101Controller {
 		json.put("rows", list);
 		return json;
 	}
-	
 
-
+	// 공통코드 등록시 중복체크
 	@RequestMapping(value = "/codeDuplicateCheck.do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject codeDuplicateCheck(@RequestParam Map<String, Object> requestMap) throws Exception {
@@ -199,6 +187,6 @@ public class Ris0101Controller {
 		json.put("result", result);
 		return json;
 	}
-	
+
 }
 
