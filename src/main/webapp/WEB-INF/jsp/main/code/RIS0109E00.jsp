@@ -1,257 +1,92 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>기준정보 입력관리</title>
+  <link rel="stylesheet" type="text/css" href="/css/risstyle.css" />
+  <link rel="stylesheet" type="text/css" href="/css/code/RIS0101E00.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/code/RIS0101E01.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
-  <body>
-    <main class="main__container">
-      <!-- 검색 -->
-      <section class="search__container">
-        <p class="filter__keyword">검색어 :</p>
-        <select class="filter__options">
-          <option value="">option 1</option>
-          <option value="">option 2</option>
-        </select>
-        <button class="all__btn img__btn search__btn">검색</button>
-      </section>
+<body>
+<main class="main__container">
+  <!-- 검색영역 설정 Start -->
+  <div class="inquiry__page-flex mt5">
+    <section class="inquiry__search-section">
+      <!-- 검색조건 영역 Start -->
+      <div class="search__container" style="justify-content:space-between;"> <!-- 1 Row -->
+        <div class="box__flex">
+          <label class="box__label">&nbsp;&nbsp;대분류 코드&nbsp;:&nbsp;</label>
+          <select id="selectBox" name="selectBox" onchange="searchBox(this.value)">
+            <!-- 					<option label="대분류 코드를 선택해주세요." selected="selected"/> -->
+            <option label="대분류 코드를 선택해주세요." selected="selected">
 
-      <!-- 그리드 타이틀 -->
-      <div class="grid__title">
-        <p>그리드 타이틀</p>
-
-        <!-- 버튼 컨테이너 -->
-        <div class="btn__container">
-        	<button class="all__btn img__btn update__btn">수정</button>
-        	<button class="all__btn img__btn insert__btn">입력</button>
-		    <button class="all__btn img__btn delete__btn">삭제</button>
-    		<button class="all__btn img__btn save__btn">저장</button>
-		    <button class="all__btn text__btn">글자만</button>
+            </option><option value="DOCTORLIST">의사정보관리</option><option value="GRADE">사용자 권한</option><option value="GWA_LIST">진료과 리스트</option><option value="IMGN_DVSN_CD">촬영구분</option><option value="IMGN_BDYP_CD">촬영부위</option><option value="IMGN_DRCT_CD">방향</option><option value="IMGN_EQPM_CD">촬영실 장비 코드</option><option value="IMGN_ROOM_CD">촬영실 코드</option><option value="INFO_FORM_CD">안내장 서식구분</option><option value="INTR_CD">인터페이스 코드</option><option value="LANG_GUBUN">다국어구분</option><option value="LANG_MAIN">다국어 주언어</option><option value="NTIL_CD">국가 코드</option><option value="STTS_BDYP_CD">통계부위</option><option value="VIST_DVSN_CD">내원구분 관리</option></select>
+          <a href="javascript:reloadGrid('list');" class="ml-2">
+            <button class="all__btn img__btn img__btn refresh__btn">
+              <span class="box__label">새로고침</span>
+            </button>
+          </a>
+        </div>
+        <div class="box__flex">
+          <a href="javascript:fn_update();" class="ml-2">
+            <button class="all__btn img__btn img__btn update__btn">
+              <span class="box__label">수정</span>
+            </button>
+          </a>
+          <a href="javascript:fn_add();" class="ml-2">
+            <button class="all__btn img__btn insert__btn">
+              <span class="box__label">입력</span>
+            </button>
+          </a>
+          <a href="javascript:fn_delete('D');" class="ml-2">
+            <button class="all__btn img__btn delete__btn">
+              <span class="box__label">삭제</span>
+            </button>
+          </a>
+          <a href="javascript:fn_save()" class="ml-2">
+            <button class="all__btn img__btn save__btn">
+              <span class="box__label">저장</span>
+            </button>
+          </a>
         </div>
       </div>
-      <!-- 그리드 -->
-      <div class="grid__container">
-        <section class="grid__box">
-          <!-- 그리드 -->
-          <table id="list1" class="grid1"></table>
-        </section>
+      <!-- 검색조건 영역 End -->
+    </section>
+    <!-- 검색영역 설정 End -->
+
+    <form commandname="VO" id="savefrm" name="savefrm" method="post">
+      <input type="hidden" name="q_user_id" id="q_user_id" value="admin">
+      <input type="hidden" name="iud" value="">
+      <input type="hidden" name="lrgc_cd" value="">
+      <input type="hidden" name="clmn_nm" value="">
+      <input type="hidden" name="appl_kr_nm" value="">
+      <input type="hidden" name="appl_engl_nm" value="">
+      <input type="hidden" name="clmn_appl_dvsn" value="">
+      <input type="hidden" name="iput_nm1" value="">
+      <input type="hidden" name="iput_nm2" value="">
+      <input type="hidden" name="iput_nm3" value="">
+      <input type="hidden" name="iput_nm4" value="">
+      <input type="hidden" name="iput_nm5" value="">
+      <input type="hidden" name="iput_vlue1" value="">
+      <input type="hidden" name="iput_vlue2" value="">
+      <input type="hidden" name="iput_vlue3" value="">
+      <input type="hidden" name="iput_vlue4" value="">
+      <input type="hidden" name="iput_vlue5" value="">
+      <input type="hidden" name="elct_lrgc_cd" value="">
+      <input type="hidden" name="rqrd_yn" value="">
+    </form>
+
+    <!-- Data 영역설정 Start -->
+    <!-- <div style="text-align: center;"><h1 id="q_title" style="color: black;">촬영 장비 관리</h1></div> -->
+    <section class="inquiry__result-section mt5">
+      <div class="fl-R grid1" align="center" style="width:100%"> <!-- width은 화면에 맞춰서 조절 -->
+        <div class="ui-jqgrid ui-widget ui-widget-content ui-corner-all" id="gbox_list" dir="ltr" style="width: 1439px;"><div class="ui-widget-overlay jqgrid-overlay" id="lui_list"></div><div class="loading ui-state-default ui-state-active" id="load_list" style="display: none;">자료 조회중입니다. 잠시만 기다리세요...</div><div class="ui-jqgrid-view" id="gview_list" style="width: 1439px;"><div class="ui-jqgrid-titlebar ui-widget-header ui-corner-top ui-helper-clearfix" style="display: none;"><a role="link" href="javascript:void(0)" class="ui-jqgrid-titlebar-close HeaderButton" style="right: 0px;"><span class="ui-icon ui-icon-circle-triangle-n"></span></a><span class="ui-jqgrid-title"></span></div><div class="ui-state-default ui-jqgrid-hdiv" style="width: 1439px;"><div class="ui-jqgrid-hbox"><table class="ui-jqgrid-htable" style="width: 1439px;" role="grid" aria-labelledby="gbox_list" cellspacing="0" cellpadding="0" border="0"><thead><tr class="ui-jqgrid-labels" role="rowheader"><th id="list_rn" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 25px;"><div id="jqgh_list_rn"><span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iud" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 150px; display: none;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iud" class="ui-jqgrid-sortable">iud<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_hspt_id" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 150px; display: none;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_hspt_id" class="ui-jqgrid-sortable">병원ID<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_lrgc_cd" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 150px; display: none;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_lrgc_cd" class="ui-jqgrid-sortable">대분류코드<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_clmn_nm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 137px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_clmn_nm" class="ui-jqgrid-sortable">컬럼 명<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_appl_kr_nm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 137px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_appl_kr_nm" class="ui-jqgrid-sortable">적용명<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_appl_engl_nm" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 137px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_appl_engl_nm" class="ui-jqgrid-sortable">적용 영문명<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_clmn_appl_dvsn" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 110px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_clmn_appl_dvsn" class="ui-jqgrid-sortable">컬럼적용구분<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_rqrd_yn" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_rqrd_yn" class="ui-jqgrid-sortable">필수입력<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_elct_lrgc_cd" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 137px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_elct_lrgc_cd" class="ui-jqgrid-sortable">선택대분류코드<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_nm1" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_nm1" class="ui-jqgrid-sortable">입력명1<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_vlue1" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_vlue1" class="ui-jqgrid-sortable">입력값1<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_nm2" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_nm2" class="ui-jqgrid-sortable">입력명2<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_vlue2" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_vlue2" class="ui-jqgrid-sortable">입력값2<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_nm3" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_nm3" class="ui-jqgrid-sortable">입력명3<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_vlue3" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_vlue3" class="ui-jqgrid-sortable">입력값3<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_nm4" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_nm4" class="ui-jqgrid-sortable">입력명4<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_vlue4" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_vlue4" class="ui-jqgrid-sortable">입력값4<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_nm5" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 69px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_nm5" class="ui-jqgrid-sortable">입력명5<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th><th id="list_iput_vlue5" role="columnheader" class="ui-state-default ui-th-column ui-th-ltr" style="width: 66px;"><span class="ui-jqgrid-resize ui-jqgrid-resize-ltr" style="cursor: col-resize;">&nbsp;</span><div id="jqgh_list_iput_vlue5" class="ui-jqgrid-sortable">입력값5<span class="s-ico" style="display:none"><span sort="asc" class="ui-grid-ico-sort ui-icon-asc ui-state-disabled ui-icon ui-icon-triangle-1-n ui-sort-ltr"></span><span sort="desc" class="ui-grid-ico-sort ui-icon-desc ui-state-disabled ui-icon ui-icon-triangle-1-s ui-sort-ltr"></span></span></div></th></tr></thead></table></div></div><div class="ui-jqgrid-bdiv" style="height: 629.6px; width: 1439px;"><div style="position:relative;"><div></div><table id="list" style="width: 1439px;" tabindex="0" cellspacing="0" cellpadding="0" border="0" role="grid" aria-multiselectable="false" aria-labelledby="gbox_list" class="ui-jqgrid-btable"><tbody><tr class="jqgfirstrow" role="row" style="height:auto"><td role="gridcell" style="height:0px;width:25px;"></td><td role="gridcell" style="height:0px;width:150px;display:none;"></td><td role="gridcell" style="height:0px;width:150px;display:none;"></td><td role="gridcell" style="height:0px;width:150px;display:none;"></td><td role="gridcell" style="height: 0px; width: 137px;"></td><td role="gridcell" style="height: 0px; width: 137px;"></td><td role="gridcell" style="height: 0px; width: 137px;"></td><td role="gridcell" style="height: 0px; width: 110px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 137px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 69px;"></td><td role="gridcell" style="height: 0px; width: 66px;"></td></tr><tr><td align="center" colspan="17">&nbsp;</td></tr><tr><td align="center" colspan="17"><b>등록된 정보가 존재하지않습니다.<br></b></td></tr><tr><td align="center" colspan="17">&nbsp;</td></tr></tbody></table></div></div></div><div class="ui-jqgrid-resize-mark" id="rs_mlist">&nbsp;</div></div>
       </div>
-    </main>
-
-    <script>
-      $(document).ready(function () {
-        var mydata = [
-          {
-            date: "2007-10-01",
-            name: "test",
-            id: "id",
-            product: "상품1",
-            amount: "10.00",
-            total: "210.00",
-          },
-          {
-            date: "2007-10-02",
-            name: "test2",
-            id: "id2",
-            product: "상품1",
-            amount: "20.00",
-            total: "320.00",
-          },
-          {
-            date: "2007-09-01",
-            name: "test3",
-            id: "id3",
-            product: "상품1",
-            amount: "30.00",
-            total: "430.00",
-          },
-          {
-            date: "2007-10-04",
-            name: "test",
-            id: "id4",
-            product: "상품1",
-            amount: "10.00",
-            total: "210.00",
-          },
-          {
-            date: "2007-10-05",
-            name: "test2",
-            id: "id5",
-            product: "상품1",
-            amount: "20.00",
-            total: "320.00",
-          },
-          {
-            date: "2007-09-06",
-            name: "test3",
-            id: "id6",
-            product: "상품2",
-            amount: "30.00",
-            total: "430.00",
-          },
-          {
-            date: "2007-10-04",
-            name: "test",
-            id: "id7",
-            product: "상품2",
-            amount: "10.00",
-            total: "210.00",
-          },
-          {
-            date: "2007-10-03",
-            name: "test2",
-            id: "id8",
-            product: "상품2",
-            amount: "20.00",
-            total: "320.00",
-          },
-          {
-            date: "2007-09-01",
-            name: "test3",
-            id: "id9",
-            product: "상품2",
-            amount: "30.00",
-            total: "430.00",
-          },
-          {
-            date: "2007-10-01",
-            name: "test",
-            id: "id10",
-            product: "상품2",
-            amount: "10.00",
-            total: "210.00",
-          },
-          {
-            date: "2007-10-02",
-            name: "test2",
-            id: "id11",
-            product: "상품2",
-            amount: "20.00",
-            total: "320.00",
-          },
-          {
-            date: "2007-09-01",
-            name: "test3",
-            id: "id12",
-            product: "상품2",
-            amount: "30.00",
-            total: "430.00",
-          },
-          {
-            date: "2007-10-04",
-            name: "test",
-            id: "id13",
-            product: "상품2",
-            amount: "10.00",
-            total: "210.00",
-          },
-          {
-            date: "2007-10-05",
-            name: "test2",
-            id: "id14",
-            product: "상품2",
-            amount: "20.00",
-            total: "320.00",
-          },
-          {
-            date: "2007-09-06",
-            name: "test3",
-            id: "id15",
-            product: "상품2",
-            amount: "30.00",
-            total: "430.00",
-          },
-          {
-            date: "2007-10-04",
-            name: "test",
-            id: "id16",
-            product: "상품2",
-            amount: "10.00",
-            total: "210.00",
-          },
-          {
-            date: "2007-10-03",
-            name: "test2",
-            id: "id17",
-            product: "상품2",
-            amount: "20.00",
-            total: "320.00",
-          },
-          {
-            date: "2007-09-01",
-            name: "test3",
-            id: "id18",
-            product: "상품2",
-            amount: "30.00",
-            total: "430.00",
-          },
-          {
-            date: "2007-09-01",
-            name: "test4",
-            id: "id19",
-            product: "상품2",
-            amount: "30.00",
-            total: "430.00",
-          },
-        ];
-
-        $("#list1").jqGrid({
-          datatype: "local",
-          data: mydata,
-          colNames: ["날짜", "아이디", "이름", "상품", "가격", "합계"],
-          colModel: [
-            { name: "date", index: "date", width: 90, align: "center" },
-            { name: "name", index: "name", width: 100, align: "center" },
-            {
-              name: "id",
-              index: "id",
-              width: 150,
-              align: "center",
-            },
-            { name: "product", index: "product", width: 80, align: "center" },
-            { name: "amount", index: "amount", width: 80, align: "center" },
-            { name: "total", index: "total", width: 80, align: "center" },
-          ],
-          guiStyle: "bootstrap",
-          autowidth: true,
-          height: "94%",
-          rownumbers: true,
-          multiselect: true,
-          sortname: "id",
-          sortorder: "asc",
-          gridview: true, // 선표시 true/false
-          viewsortcols: [true, "vertical", true],
-          loadComplete: function (data) {
-            console.log(data);
-          }, // loadComplete END
-          onSelectRow: function (rowid) {
-            console.log(rowid);
-          },
-          onSortCol: function (index, idxcol, sortorder) {
-            // 그리드 Frozen Column에 정렬 화살표 표시 안되는 버그 수정
-            // (화살표 css 변경하기 전 Frozen을 풀어주고)
-            $("#list1").jqGrid("destroyFrozenColumns");
-            var $icons = $(this.grid.headers[idxcol].el).find(
-              ">div.ui-jqgrid-sortable>span.s-ico"
-            );
-            if (this.p.sortorder === "asc") {
-              //$icons.find('>span.ui-icon-asc').show();
-              $icons.find(">span.ui-icon-asc")[0].style.display = "";
-              $icons.find(">span.ui-icon-asc")[0].style.marginTop = "1px";
-              $icons.find(">span.ui-icon-desc").hide();
-            } else {
-              //$icons.find('>span.ui-icon-desc').show();
-              $icons.find(">span.ui-icon-desc")[0].style.display = "";
-              $icons.find(">span.ui-icon-asc").hide();
-            }
-            // (화살표 css 변경 후 Frozen을 다시 설정)
-            $("#list1").jqGrid("setFrozenColumns");
-            //alert(index+'/'+idxcol+'/'+sortorder);
-          },
-        });
-      });
-    </script>
+    </section>
+    <!-- Data 영역설정 End -->
+  </div>
+</main>
   </body>
 </html>
