@@ -288,10 +288,25 @@ public class Ris0101Controller {
 	@ResponseBody
 	public JSONObject risCodeList3(@RequestParam Map<String, Object> requestMap
 	) throws Exception {
-		System.out.println("requestMap :::"+requestMap);
-		requestMap.put("hsptId",requestMap.get("hspt_id"));
-		requestMap.put("lrgcCd",requestMap.get("lrgc_cd"));
-		requestMap.put("mddlCd",requestMap.get("mddl_cd"));
+		System.out.println("requestMap risCodeList3 :::"+requestMap);
+		if("".equals(requestMap.get("hsptId")) && requestMap.get("hsptId") == null){
+			requestMap.put("hsptId",requestMap.get("hspt_id"));
+		}else if(!"".equals(requestMap.get("hspt_id")) && requestMap.get("hspt_id") != null){
+			requestMap.put("hsptId",requestMap.get("hspt_id"));
+		}
+
+		if("".equals(requestMap.get("lrgcCd")) && requestMap.get("lrgcCd") == null){
+			requestMap.put("lrgcCd",requestMap.get("lrgc_cd"));
+		}else if(!"".equals(requestMap.get("lrgc_cd")) && requestMap.get("lrgc_cd") != null){
+			requestMap.put("lrgcCd",requestMap.get("lrgc_cd"));
+		}
+
+		if("".equals(requestMap.get("mddlCd")) && requestMap.get("mddlCd") == null){
+			requestMap.put("mddlCd",requestMap.get("mddl_cd"));
+		}else if(!"".equals(requestMap.get("mddl_cd")) && requestMap.get("mddl_cd") != null){
+			requestMap.put("mddlCd",requestMap.get("mddl_cd"));
+		}
+
 		JSONObject json = new JSONObject();
 		List<Ris0103DTO> list = ris0103Service.findAll(requestMap); // 대분류 코드 리스트 데이터
 		json.put("rows", list);

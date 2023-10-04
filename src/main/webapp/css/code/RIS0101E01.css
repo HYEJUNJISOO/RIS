@@ -436,7 +436,6 @@ ul.twoDepth__menu-items li:first-child{
 .inquiry__page-flex .box__flex {
     display: flex;
     align-items: center;
-    margin-top: 20px;
 }
 .ml-2{
   margin-left: .5rem!important;
@@ -462,7 +461,6 @@ ul.twoDepth__menu-items li:first-child{
 #header{
 }
 #contents{
-	font-size:10px;
 	height:88%;
 }
 #bottom{
