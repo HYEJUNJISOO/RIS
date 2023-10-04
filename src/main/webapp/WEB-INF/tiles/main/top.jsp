@@ -18,7 +18,7 @@
                     <a href="/RIS0101E00.do">공통코드관리</a>
                     <a href="/RIS0109E00.do">기준정보 입력관리</a>
                     <a href="#">촬영실 관리</a>
-                    <a href="/RIS0102E00.do">촬영실 장비관리</a>
+                    <a href="/RIS0102E00.do?hsptId=A001&lrgcCd=IMGN_EQPM_CD">촬영실 장비관리</a>
                     <a href="/RIS0201E00.do">촬영코드 관리</a>
                 </div>
             </li>

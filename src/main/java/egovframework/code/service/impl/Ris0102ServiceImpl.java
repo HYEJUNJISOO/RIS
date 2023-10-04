@@ -21,5 +21,13 @@ public class Ris0102ServiceImpl implements Ris0102Service{
 	public List<Ris0102DTO> findAll(Map<String, Object> requestMap) {
 		return ris0102Mapper.findListAll(requestMap);
 	}
-	
+
+	@Override
+	public List<Ris0102DTO> findRis0102List(Map<String, Object> requestMap) {
+		return ris0102Mapper.findRis0102List(requestMap);
+	}
+	@Override
+	public Ris0102DTO findRis0102View(Map<String, Object> requestMap) {
+		return ris0102Mapper.findRis0102View(requestMap);
+	}
 }

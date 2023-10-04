@@ -27,8 +27,27 @@
 			 , MDFC_ID
 			 , MDFC_DTTM
             FROM RIS0102
-          WHERE HSPT_ID =  #{hsptId} 
+          WHERE HSPT_ID = #{hsptId}
             AND LRGC_CD = #{lrgcCd}
           ORDER BY OTPT_SQNC, LRGC_CD
+	</select>
+	
+	<select id="findRis0102List" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0102DTO" >
+		SELECT *
+		FROM RIS0102 A
+		WHERE A.LRGC_CD = #{lrgcCd}
+			AND A.HSPT_ID = #{hsptId}
+			AND A.MDDL_CD != '%'
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
+	<select id="findRis0102View" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0102DTO" >
+		SELECT *
+		FROM RIS0102 A
+		WHERE A.LRGC_CD = #{lrgcCd}
+			AND A.HSPT_ID = #{hsptId}
+			AND A.MDDL_CD = #{mddlCd}
+			AND A.MDDL_CD != '%'
+		ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
 </mapper>

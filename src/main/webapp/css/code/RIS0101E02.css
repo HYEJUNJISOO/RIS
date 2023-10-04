@@ -152,6 +152,10 @@ a {
   color:#000000;
   font-family: "Noto Sans KR", sans-serif;
 }
+
+.detail__btn::before {
+    background-image: url(/images/icons/detail.png);
+}
 /* .fc-event-title-container{ */
 /*   background-color: rgb(74,140,138); */
 /*   border:1px solid rgb(74,140,138); */
@@ -428,7 +432,7 @@ ul.twoDepth__menu-items li:first-child{
     color: black;
     margin-bottom: 10px;
     border-bottom: 1px solid rgb(223,227,232);
-    font: 10px;
+    font-size: 10px;
     display:flex;
     justify-content: space-between;
     width: 99%;
@@ -453,7 +457,7 @@ ul.twoDepth__menu-items li:first-child{
 	
 	}
 .ui-widget{
-	height: calc(100%-100px);	
+	height: calc(100%- 100px);
 }
 /* contents CSS   */
 #wrap{
@@ -736,7 +740,7 @@ li.ui-state-default.ui-corner-top{
 .ui-jqgrid .tree-plus {position: absolute;	height: 18px; width: 18px;	overflow: hidden;}
 .ui-jqgrid .tree-leaf {position: absolute;	height: 18px; width: 18px;overflow: hidden;}
 .ui-jqgrid .treeclick {cursor: pointer;}
-.ui-icon { width: 16px; height: 16px; background-image: url(images/ui-icons_469bdd_256x240.png); }
+/*.ui-icon { width: 16px; height: 16px; background-image: url(images/ui-icons_469bdd_256x240.png); }*/
 .ui-icon-radio-off { background-position: -96px -144px; }
 .ui-icon-triangle-1-e { background-position: -32px -16px; }
 .ui-icon-triangle-1-s { background-position: -64px -16px; }

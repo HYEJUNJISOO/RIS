@@ -32,11 +32,38 @@
         ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
 	
-	<select id="findListOne" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0101DTO" >
+	<select id="findRis0101MapOne" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+		FROM RIS0101 A
+		WHERE A.LRGC_CD = #{lrgc_cd}
+			AND A.HSPT_ID = #{hspt_id}
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
+	<select id="findRis0101One" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0101DTO" >
 		SELECT *
 		 FROM RIS0101 A
 		WHERE A.LRGC_CD = #{lrgc_cd}
 		  AND A.HSPT_ID = #{hspt_id}
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
+	<select id="findRis0102One" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0102DTO" >
+		SELECT *
+		FROM RIS0102 A
+		WHERE A.LRGC_CD = #{lrgc_cd}
+			AND A.HSPT_ID = #{hspt_id}
+			AND A.MDDL_CD = #{mddl_cd}
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+	
+	<select id="findRis0103One" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0103DTO" >
+		SELECT *
+		FROM RIS0103 A
+		WHERE A.LRGC_CD = #{lrgc_cd}
+			AND A.HSPT_ID = #{hspt_id}
+			AND A.MDDL_CD = #{mddl_cd}
+			AND A.SMLL_CD = #{smll_cd}
 		ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
 	

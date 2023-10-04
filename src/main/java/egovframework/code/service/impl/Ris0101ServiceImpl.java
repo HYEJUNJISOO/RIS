@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import egovframework.code.model.Ris0102DTO;
+import egovframework.code.model.Ris0103DTO;
 import org.springframework.stereotype.Service;
 
 import egovframework.code.mapper.Ris0101Mapper;
@@ -23,9 +25,13 @@ public class Ris0101ServiceImpl implements Ris0101Service{
 	}
 
 	@Override
-	public List<Ris0101DTO> findOne(Map<String, Object> requestMap) {
-		return ris0101Mapper.findListOne(requestMap);
+	public List<Ris0101DTO> findRis0101One(Map<String, Object> requestMap) { return ris0101Mapper.findRis0101One(requestMap); }
+	@Override
+	public List<Ris0102DTO> findRis0102One(Map<String, Object> requestMap) {
+		return ris0101Mapper.findRis0102One(requestMap);
 	}
+	@Override
+	public List<Ris0103DTO> findRis0103One(Map<String, Object> requestMap) { return ris0101Mapper.findRis0103One(requestMap); }
 	/*대분류 등록,수정,삭제*/
 	@Override
 	public int insertRis0101Data(Map<String, Object> requestMap) { return ris0101Mapper.insertRis0101Data(requestMap); }

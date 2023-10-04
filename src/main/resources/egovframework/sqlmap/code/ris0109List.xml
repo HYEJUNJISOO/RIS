@@ -2,34 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.code.mapper.Ris0109Mapper">
 	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0103DTO">
-		SELECT HSPT_ID
-			 , LRGC_CD
-			 , MDDL_CD
-			 , SMLL_CD
-			 , SMLL_KR_NM
-			 , SMLL_ENGL_NM
-			 , SMLL_ABBR_NM
-			 , OTPT_SQNC
-			 , APPL_DATE
-			 , EXPR_DATE
-			 , CHRC1
-			 , CHRC2
-			 , CHRC3
-			 , CHRC4
-			 , CHRC5
-			 , nmbr1
-			 , nmbr2
-			 , nmbr3
-			 , nmbr4
-			 , nmbr5
-			 , RGST_ID
-			 , RGST_DTTM
-			 , MDFC_ID
-			 , MDFC_DTTM
-            FROM RIS0103
-          WHERE HSPT_ID =  #{hsptId} 
-            AND LRGC_CD = #{lrgcCd}
-            AND MDDL_CD = #{mddlCd}
-          ORDER BY OTPT_SQNC, LRGC_CD, MDDL_CD
+		SELECT *
+            FROM RIS0109
+          WHERE 1=1
 	</select>
 </mapper>

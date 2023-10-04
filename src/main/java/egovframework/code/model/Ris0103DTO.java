@@ -22,7 +22,7 @@ public class Ris0103DTO {
 	private String hsptId; 
 	@NotBlank
 	@Size(max = 20)
-	private String lrgcㅊd;
+	private String lrgcCd;
 	@NotBlank
 	@Size(max = 20)
 	private String mddlCd;

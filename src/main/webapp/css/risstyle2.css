@@ -448,7 +448,7 @@ ul.twoDepth__menu-items li:first-child{
 	
 	}
 .ui-widget{
-	height: calc(100%-100px);	
+	height: calc(100%- 100px);
 }
 /* contents CSS   */
 #wrap{
@@ -732,7 +732,7 @@ li.ui-state-default.ui-corner-top{
 .ui-jqgrid .tree-plus {position: absolute;	height: 18px; width: 18px;	overflow: hidden;}
 .ui-jqgrid .tree-leaf {position: absolute;	height: 18px; width: 18px;overflow: hidden;}
 .ui-jqgrid .treeclick {cursor: pointer;}
-.ui-icon { width: 16px; height: 16px; background-image: url(images/ui-icons_469bdd_256x240.png); }
+/*.ui-icon { width: 16px; height: 16px; background-image: url(images/ui-icons_469bdd_256x240.png); }*/
 .ui-icon-radio-off { background-position: -96px -144px; }
 .ui-icon-triangle-1-e { background-position: -32px -16px; }
 .ui-icon-triangle-1-s { background-position: -64px -16px; }

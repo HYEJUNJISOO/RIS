@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>코드상세</title>
+<title>소분류 코드상세</title>
 <link rel="stylesheet" type="text/css" href="/css/code/RIS0101E01.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
 </head>
@@ -38,9 +38,16 @@
 					<a href="javascript:fn_query()" class="ml-2">
 						<button class="all__btn img__btn mokrok__btn">목록</button>
 					</a>
+
+					<a href="javascript:fn_goto('L');" class="ml-2">
+						<button class="all__btn img__btn detail__btn">대분류코드</button>
+					</a>
+					<a href="javascript:fn_goto('M');" class="ml-2">
+						<button class="all__btn img__btn detail__btn">중분류코드</button>
+					</a>
 				</div>
 				<div class="box__flex">
-					<a href="javascript:fn_update('L');" class="ml-2">
+					<a href="javascript:fn_update('S');" class="ml-2">
 						<button class="all__btn img__btn img__btn update__btn">수정</button>
 					</a>
 					<a href="javascript:fn_expr('D');" class="ml-2">
@@ -57,18 +64,19 @@
 		<!-- Data 영역설정 Start -->
 		<section class="inquiry__result-section mt5">
 
-		<div class="fl-L grid1 mx-1" style="width:50%;"> <!-- width은 화면에 맞춰서 조절 -->
+		<div class="fl-L grid1 mx-1" style="width:100%;"> <!-- width은 화면에 맞춰서 조절 -->
 		<form commandName="VO" id="regfrm" name="regfrm" method="post">
 			<c:forEach var="result" items="${resultList}" varStatus="status">
 			<input type="hidden" name="currdate" id="currdate" value=""/>
 			<input type="hidden" name="q_user_id" id="q_user_id" value="admin"/>
-			<input type="hidden" name="checkLMS" id="checkLMS" value="L"/>
+			<input type="hidden" name="checkLMS" id="checkLMS" value="S"/>
 			<input type="hidden" name="hspt_id" id="hspt_id" value="<c:out value="${result.hsptId}"/>"/>
 			<input type="hidden" name="lrgc_cd" id="lrgc_cd" value="<c:out value="${result.lrgcCd}"/>"/>
-			<input type="hidden" name="lrgc_acph" id="lrgc_acph" value="<c:out value="${result.lrgcAcph}"/>"/>
+			<input type="hidden" name="mddl_cd" id="mddl_cd" value="<c:out value="${result.mddlCd}"/>"/>
+			<input type="hidden" name="smll_cd" id="smll_cd" value="<c:out value="${result.smllCd}"/>"/>
 			<input type="hidden" name="expr_date" id="expr_date" value="<c:out value="${result.exprDate}"/>"/>
-			<input type="hidden" name="q_smll_cd" id="q_smll_cd" value=""/>
-			<input type="hidden" name="q_mddl_cd" id="q_mddl_cd" value=""/>
+			<input type="hidden" name="q_smll_cd" id="q_smll_cd" value="<c:out value="${result.smllCd}"/>"/>
+			<input type="hidden" name="q_mddl_cd" id="q_mddl_cd" value="<c:out value="${result.mddlCd}"/>"/>
 			<input type="hidden" name="q_lrgc_cd" id="q_lrgc_cd" value="<c:out value="${result.lrgcCd}"/>"/>
 			<table class="table table-hover table-dark" style="width:100%;table-layout: fixed;">
 					<colgroup>
@@ -88,17 +96,15 @@
 									<th colspan="2">대분류 코드</th>
 									<td colspan="4"><c:out value="${result.hsptId}"/></td>
 									<th colspan="2">대분류 한글 명</th>
-									<td colspan="2"><c:out value="${result.lrgcKrNm}"/></td>
+									<td colspan="2"><c:out value="${result.smllKrNm}"/></td>
 							</tr>
 							<tr>
 								<th colspan="2">대분류 영어 명</th>
-								<td colspan="4"><c:out value="${result.lrgcEnglNm}"/></td>
+								<td colspan="4"><c:out value="${result.smllEnglNm}"/></td>
 								<th colspan="2">대분류 약어 명</th>
-								<td colspan="2"><c:out value="${result.lrgcAbbrNm}"/></td>
+								<td colspan="2"><c:out value="${result.smllAbbrNm}"/></td>
 							</tr>
 							<tr>
-								<th colspan="2">자릿수</th>
-								<td colspan="4"><c:out value="${result.lrgcAcph}"/></td>
 								<th colspan="2">출력순</th>
 								<td colspan="2"><c:out value="${result.otptSqnc}"/></td>
 							</tr>
@@ -154,67 +160,6 @@
 		</form>
 		    <!-- 두개 Grid 처리(좌측,우측) -->
 		    </div>
-		    <div class="fl-R grid2" align="center" style="width:50%"> <!-- width은 화면에 맞춰서 조절 -->
-					<div class="srcArea">
-						<div class="box__flex">
-							<span style="font-weight:bold;">중분류 코드</span>
-							<a href='javascript:reloadGrid("list")' class="ml-2">
-								<button class="all__btn img__btn img__btn refresh__btn">새로고침</button>
-							</a>
-							<a href='javascript:fn_viewer("M")' class="ml-2">
-								<button class="all__btn img__btn img__btn detail__btn">상세</button>
-							</a>
-						</div>
-						<div class="box__flex">
-							<a href='javascript:fn_edit("M")' class="ml-2">
-									<button class="all__btn img__btn img__btn update__btn">수정</button>
-							</a>
-							<a href='javascript:fn_add("M")' class="ml-2">
-								<button class="all__btn img__btn insert__btn">입력</button>
-							</a>
-							<a href='javascript:fn_expr("M")' class="ml-2">
-								<button class="all__btn img__btn bullyong__btn">불용</button>
-							</a>
-							<a href='javascript:fn_delete("M")' class="ml-2">
-								<button class="all__btn img__btn delete__btn">삭제</button>
-							</a>
-							<a href='javascript:fn_save("M")' class="ml-2">
-								<button class="all__btn img__btn save__btn">저장</button>
-							</a>
-						</div>
-					</div>
-					<table id="list"></table>
-
-					<div class="srcArea mt5">
-						<div class="box__flex">
-							<span style="font-weight:bold;">소분류 코드</span>
-							<a href='javascript:reloadGrid("list2")' class="ml-2">
-								<button class="all__btn img__btn img__btn refresh__btn">새로고침</button>
-							</a>
-							<a href='javascript:fn_viewer("S")' class="ml-2">
-								<button class="all__btn img__btn img__btn detail__btn">상세</button>
-							</a>
-						</div>
-						<div class="box__flex">
-							<a href='javascript:fn_edit("S")' class="ml-2">
-								<button class="all__btn img__btn img__btn update__btn">수정</button>
-							</a>
-							<a href='javascript:fn_add("S")' class="ml-2">
-								<button class="all__btn img__btn insert__btn">입력</button>
-							</a>
-							<a href='javascript:fn_expr("S")' class="ml-2">
-								<button class="all__btn img__btn bullyong__btn">불용</button>
-							</a>
-							<a href='javascript:fn_delete("S")' class="ml-2">
-								<button class="all__btn img__btn delete__btn">삭제</button>
-							</a>
-							<a href='javascript:fn_save("S")' class="ml-2">
-								<button class="all__btn img__btn save__btn">저장</button>
-							</a>
-						</div>
-					</div>
-					<table id="list2"></table>
-		   	</div>
 
 		</section>
 	</div>
@@ -1585,16 +1530,11 @@
 							document.regfrm.submit();
 						}
 						if(LMS == "M"){
-							var mddl_cd = $('#list').getCell(rowid, "mddlCd");
-
-							document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+mddl_cd+"&submitLMS="+LMS;
+							document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+jsonData.mddlCd+"&submitLMS="+LMS;
 							document.regfrm.submit();
 						}
 						if(LMS == "S"){
-							var mddl_cd = $('#list2').getCell(rowid2, "mddlCd");
-							var smll_cd = $('#list2').getCell(rowid2, "smllCd");
-
-							document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+mddl_cd+"&smllCd="+smll_cd+"&submitLMS="+LMS;
+							document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+jsonData.mddlCd+"&smllCd="+jsonData.smllCd+"&submitLMS="+LMS;
 							document.regfrm.submit();
 						}
 					}else{
@@ -1607,16 +1547,11 @@
 						document.regfrm.submit();
 					}
 					if(LMS == "M"){
-						var mddl_cd = $('#list').getCell(rowid, "mddlCd");
-
-						document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+mddl_cd+"&submitLMS="+LMS;
+						document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+jsonData.mddlCd+"&submitLMS="+LMS;
 						document.regfrm.submit();
 					}
 					if(LMS == "S"){
-						var mddl_cd = $('#list2').getCell(rowid2, "mddlCd");
-						var smll_cd = $('#list2').getCell(rowid2, "smllCd");
-
-						document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+mddl_cd+"&smllCd="+smll_cd+"&submitLMS="+LMS;
+						document.regfrm.action = "/RIS0101E03.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+jsonData.mddlCd+"&smllCd="+jsonData.smllCd+"&submitLMS="+LMS;
 						document.regfrm.submit();
 					}
 				}
@@ -1624,7 +1559,7 @@
 
 
 			/* 상세보기 */
-			function fn_viewer(LMS){
+			function fn_viewer(LMS,view){
 				var iudcnt = 0;
 				// 중분류
 				var ids = $("#list").getDataIDs();
@@ -1681,13 +1616,13 @@
 					}
 					// 중분류
 					if(LMS == "M"){
-							var lrgc_cd = $('#list').getCell(rowid, "lrgcCd");
-							var mddl_cd = $('#list').getCell(rowid, "mddlCd");
+						var lrgc_cd = $('#list').getCell(rowid, "lrgcCd");
+						var mddl_cd = $('#list').getCell(rowid, "mddlCd");
 
-							fn_reset();
-							document.savefrm.checkLMS.value =LMS;
-							document.regfrm.action = "/RIS0101E01M.do?hsptId="+jsonData.hsptId+"&lrgcCd="+lrgc_cd+"&mddlCd="+mddl_cd+"&submitLMS="+LMS;
-							document.regfrm.submit();
+						fn_reset();
+						document.savefrm.checkLMS.value =LMS;
+						document.regfrm.action = "/RIS0101E01M.do?hsptId="+jsonData.hsptId+"&lrgcCd="+lrgc_cd+"&mddlCd="+mddl_cd+"&submitLMS="+LMS;
+						document.regfrm.submit();
 					}
 					// 소분류
 					if(LMS == "S"){
@@ -1736,6 +1671,17 @@
 
 				}else{
 					document.regfrm.action = "/RIS0101E00.do";
+					document.regfrm.submit();
+				}
+			}
+
+			//대분류코드 돌아가기
+			function fn_goto(LMS){
+				if(LMS == 'L'){
+					document.regfrm.action = "/RIS0101E01.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd;
+					document.regfrm.submit();
+				}else if(LMS == 'M'){
+					document.regfrm.action = "/RIS0101E01M.do?hsptId="+jsonData.hsptId+"&lrgcCd="+jsonData.lrgcCd+"&mddlCd="+jsonData.mddlCd+"&submitLMS="+LMS;
 					document.regfrm.submit();
 				}
 			}
