@@ -51,7 +51,7 @@
 			<input type="hidden" name="iud" id="iud" value="U" />
 				<c:choose>
 					<c:when test="${checkLMS == 'L'}">
-						<input type="hidden" name="hspt_id" id="hspt_id" value="<c:out value="${result.lrgcCd}"/>" />
+						<input type="hidden" name="hspt_id" id="hspt_id" value="<c:out value="${result.hsptId}"/>" />
 					</c:when>
 					<c:when test="${checkLMS == 'M'}">
 						<input type="hidden" name="hspt_id" id="hspt_id" value="<c:out value="${result.lrgcCd}"/>" />

@@ -61,101 +61,115 @@
             </a>
           </div>
         </div>
-        <form commandName="VO" id="regfrm" name="regfrm" method="post" style="height:93%;">
-          <input type="hidden" name="currdate" id="currdate" value=""/>
-          <input type="hidden" name="q_user_id" id="q_user_id" value=""/>
-          <input type="hidden" name="lrgc_cd" id="lrgc_cd" value="IMGN_ROOM_CD"/>
-          <input type="hidden" name="iud" id="iud" value=""/>
+        <form commandname="VO" id="regfrm" name="regfrm" method="post" style="height:93%;">
+          <input type="hidden" name="currdate" id="currdate" value="2023-10-04">
+          <input type="hidden" name="q_user_id" id="q_user_id" value="admin">
+          <input type="hidden" name="lrgc_cd" id="lrgc_cd" value="IMGN_ROOM_CD">
+          <input type="hidden" name="iud" id="iud" value="">
           <table class="table table-hover table-dark mt5" id="table" style="width:100%;height:100%;table-layout: fixed;">
             <colgroup>
-              <col width="5%"/>
-              <col width="15%"/>
-              <col width="5%"/>
-              <col width="15%"/>
+              <col width="5%">
+              <col width="15%">
+              <col width="5%">
+              <col width="15%">
             </colgroup>
             <tbody>
             <tr>
-              <th><span id="col_mddl_cd">코드</span></th>
+              <th><span id="col_mddl_cd">*촬영실 코드</span></th>
               <td>
-                <input type="text" id="mddl_cd"/>
-                <button type="button" class="all__btn text__btn" onclick="overlapCheck('M')" style="display: inline-block;">중복확인</button>
+                <input type="text" id="mddl_cd" name="mddl_cd" value="" readonly="readonly" disabled="disabled">
+                <button type="button" class="process__btn2 ml-2" onclick="overlapCheck('M')" style="display: inline-block;">중복확인</button>
               </td>
               <th><span id="col_otpt_sqnc">*출력순</span></th>
-              <td>
-                <input type="text" id="otpt_sqnc" name="otpt_sqnc" onkeydown="javascript:fnOnlyNumber();" maxlength="8"/>
-              </td>
+              <td><input type="text" id="otpt_sqnc" name="otpt_sqnc" onkeydown="javascript:fnOnlyNumber();" maxlength="8" readonly="readonly" disabled="disabled"></td>
             </tr>
             <tr>
               <th><span id="col_appl_date">*적용일자</span></th>
-              <td>
-                <input type="date" id="appl_date" name="appl_date" value=""/>
-              </td>
+              <td><input type="date" id="appl_date" name="appl_date" value="2023-10-04" readonly="readonly" disabled="disabled"></td>
               <th><span id="col_expr_date">*불용일자</span></th>
-              <td>
-                <input type="date" id="expr_date" name="expr_date" value="3000-01-01"/>
-              </td>
+              <td><input type="date" id="expr_date" name="expr_date" value="3000-01-01" readonly="readonly" disabled="disabled"></td>
             </tr>
             <tr>
-              <th><span id="col_mddl_kr_nm">한글 명</span></th>
+              <!-- 		                   		<th><span id="col_mddl_kr_nm">한글 명</span></th> -->
+              <th><span id="col_mddl_kr_nm">*촬영실 한글 명</span></th>
               <td>
-                <input type="text" id="mddl_kr_nm"/>
+                <input type="text" id="mddl_kr_nm" name="mddl_kr_nm" value="" readonly="readonly" disabled="disabled">
               </td>
-              <th><span id="col_mddl_engl_nm">영문 명</span></th>
-              <td>
-                <div>
-                  <input type="text" id="mddl_engl_nm"/>
-                </div>
-              </td>
+              <th><span id="col_mddl_engl_nm">촬영실 영문 명</span></th>
+              <td><div><input type="text" id="mddl_engl_nm" name="mddl_engl_nm" value="" readonly="readonly" disabled="disabled"></div></td>
             </tr>
             <tr>
-              <th><span id="col_chrc1">문자값1</span></th>
+              <!-- 		                       	<th><span id="col_chrc1">문자값1</span></th> -->
+              <th><span id="col_chrc1">*촬영실 촬영구분</span></th>
               <td>
-                <input type="text" id="chrc1" />
+                <select id="chrc1" name="chrc1" disabled="disabled">
+                  <option value="G">일반영상</option><option value="B">BMD(골밀도)</option>
+                  <option value="C">CT(전산화단층촬영)</option>
+                  <option value="M">MRI(자기공명영상)</option>
+                  <option value="A">ANGIOGRAPHY(혈관조영)</option>
+                  <option value="I">중재적방사선시술</option>
+                  <option value="U">USG(초음파)</option>
+                  <option value="F">투시조영</option>
+                  <option value="N">핵의학(감마카메라) &amp; PET-CT</option>
+                  <option value="P">조직생검</option>
+                  <option value="D">DUCT(내시경)외 PACS전송</option>
+                  <option value="Z">CD COPY</option>
+                  <option value="O">공공의료 (이동버스) X-RAY</option>
+                  <option value="V">공공의료 SONO</option>
+                  <option value="H">외부영상저장/ 판독의뢰</option>
+                  <option value="W">Mammograpy Bilateral</option>
+                  <option value="Q">영상재료</option>
+                </select>
               </td>
-              <th><span id="col_nmbr1">숫자값1</span></th>
-              <td>
-                <input type="text" id="nmbr1" />
-              </td>
+              <!-- 		                       	<th><span id="col_nmbr1">숫자값1</span></th> -->
+              <th><span id="col_nmbr1">촬영실 정보</span></th>
+              <td><input type="text" id="nmbr1" name="nmbr1" value="" readonly="readonly" disabled="disabled"></td>
             </tr>
             <tr>
-              <th><span id="col_chrc2">문자값2</span></th>
+              <!-- 		                       	<th><span id="col_chrc2">문자값2</span></th> -->
+              <th><span id="col_chrc2">*촬영실 장비</span></th>
               <td>
-                <input type="text" id="chrc2" />
+                <select id="chrc2" name="chrc2" disabled="disabled">
+                  <option value="CT1">전산화단층촬영장치</option>
+                  <option value="DR1">Digital Radiography</option>
+                  <option value="DRF1">투시조영촬영장치</option>
+                  <option value="DRG2">일반촬영장치1</option>
+                  <option value="DRM1">유방촬영용장치</option>
+                  <option value="DRP1">이동촬영용장치1</option>
+                  <option value="DUS1">초음파진단기</option>
+                  <option value="DUS4">초음파진단기(중재시술용)</option>
+                  <option value="MRI1">자기공명영상장치</option>
+                  <option value="PDR1">치아파노라마촬영장치</option>
+                  <option value="BMD1">골밀도측정촬영장치</option>
+                </select>
               </td>
-              <th><span id="col_nmbr2">숫자값2</span></th>
-              <td>
-                <input type="text" id="nmbr2" />
-              </td>
+              <!-- 		                       	<th><span id="col_nmbr2">숫자값2</span></th> -->
+              <th><span id="col_nmbr2" style="display: none;">촬영실 숫자값02</span></th>
+              <td><input type="hidden" id="nmbr2" name="nmbr2" value=""></td>
             </tr>
             <tr>
-              <th><span id="col_chrc3">문자값3</span></th>
-              <td>
-                <input type="text" id="chrc3" />
-              </td>
-              <th><span id="col_nmbr3">숫자값3</span></th>
-              <td>
-                <input type="text" id="nmbr3" />
-              </td>
+              <!-- 		                       	<th><span id="col_chrc3">문자값3</span></th> -->
+              <th><span id="col_chrc3" style="display: none;">촬영실 문자값03</span></th>
+              <td><input type="hidden" id="chrc3" name="chrc3" value=""></td>
+              <!-- 		                       	<th><span id="col_nmbr3">숫자값3</span></th> -->
+              <th><span id="col_nmbr3" style="display: none;">촬영실 숫자값03</span></th>
+              <td><input type="hidden" id="nmbr3" name="nmbr3" value=""></td>
             </tr>
             <tr>
-              <th><span id="col_chrc4">문자값4</span></th>
-              <td>
-                <input type="text" id="chrc4" />
-              </td>
-              <th><span id="col_nmbr4">숫자값4</span></th>
-              <td>
-                <input type="text" id="nmbr4" />
-              </td>
+              <!-- 		                       	<th><span id="col_chrc4">문자값4</span></th> -->
+              <th><span id="col_chrc4" style="display: none;">촬영실 문자값04</span></th>
+              <td><input type="hidden" id="chrc4" name="chrc4" value="%"></td>
+              <!-- 		                       	<th><span id="col_nmbr4">숫자값4</span></th> -->
+              <th><span id="col_nmbr4" style="display: none;">촬영실 숫자값04</span></th>
+              <td><input type="hidden" id="nmbr4" name="nmbr4" value=""></td>
             </tr>
             <tr>
-              <th><span id="col_chrc5">문자값5</span></th>
-              <td>
-                <input type="text" id="chrc5" />
-              </td>
-              <th><span id="col_nmbr5">숫자값5</span></th>
-              <td>
-                <input type="text" id="nmbr5" name="nmbr5"/>
-              </td>
+              <!-- 		                       	<th><span id="col_chrc5">문자값5</span></th> -->
+              <th><span id="col_chrc5" style="display: none;">촬영실 문자값05</span></th>
+              <td><input type="hidden" id="chrc5" name="chrc5" value="TEST_1"></td>
+              <!-- 		                       	<th><span id="col_nmbr5">숫자값5</span></th> -->
+              <th><span id="col_nmbr5" style="display: none;">촬영실 숫자값05</span></th>
+              <td><input type="hidden" id="nmbr5" name="nmbr5" value=""></td>
             </tr>
             </tbody>
           </table>
@@ -430,7 +444,7 @@
             if(data.rows[i].rqrd_yn == "Y" && data.rows[i].clmn_appl_dvsn != "H"){
               appl_kr_nm = "*"+appl_kr_nm
               null_clmn_nm.push(clmn_nm)
-              null_appl_kr_nm.push(data.ris0109List[i].appl_kr_nm)
+              null_appl_kr_nm.push(data.rows[i].appl_kr_nm)
 
               if(data.rows[i].clmn_appl_dvsn == "R"){
                 null_appl_dvsn.push("R")
@@ -462,7 +476,7 @@
               $("#"+clmn_nm).replaceWith($(text))
 
               // checkBox
-            }else if(data.ris0109List[i].clmn_appl_dvsn == "C"){
+            }else if(data.rows[i].clmn_appl_dvsn == "C"){
 
               /* text = "<span id='"+clmn_nm+"'><input type='checkbox' name='"+clmn_nm+"' value='"+data.ris0109List[i].iput_vlue1+"' />"+data.ris0109List[i].iput_nm1+"</span>";
               $("#"+clmn_nm).replaceWith($(text)) */
@@ -499,7 +513,7 @@
 
               $.ajax({
                 type : "post",
-                url : "/json/code/risCodeList.do?checkLMS="+LMS+"&lrgc_cd="+data.ris0109List[i].elct_lrgc_cd,
+                url : "/json/code/risCodeList.do?checkLMS="+LMS+"&lrgc_cd="+data.rows[i].elct_lrgc_cd,
                 async : false,
                 error : function(){
                   alert(i18n.message_045); //"[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -518,7 +532,7 @@
               });
 
               // hide
-            }else if(data.ris0109List[i].clmn_appl_dvsn == "H"){
+            }else if(data.rows[i].clmn_appl_dvsn == "H"){
               text = "<input type='hidden' id='"+clmn_nm+"' name='"+clmn_nm+"' value='' />";
               $("#"+clmn_nm).replaceWith($(text))
               $("#col_"+clmn_nm).hide()
@@ -535,7 +549,7 @@
 
       jQuery('#list').jqGrid('setGridParam', {
         postData: {
-          lrgc_cd : lrgc_cd,
+          lrgcCd : lrgcCd,
         },
         datatype:"json"
       }).trigger("reloadGrid");
@@ -597,10 +611,13 @@
         iud = "U";
         $("#table input[type=text]").attr("readonly", false);
         $("#table input[type=date]").attr("readonly", false);
+        $("#table input[type=text]").attr("disabled", false);
+        $("#table input[type=date]").attr("disabled", false);
         $("#table select").attr("disabled",false);
         $("#table input[type=radio]").attr("onclick", "");
         $("#table input[type=checkbox]").attr("onclick", "");
         $("#mddl_cd").attr("readonly", true);
+        $("#mddl_cd").attr("disabled", true);
         $("#mddl_kr_nm").focus();
       }
     }
@@ -656,7 +673,7 @@
       var authok = $("form[name='regfrm']").serialize();
       $.ajax({
         type : "post",
-        url : "/json/code/risCodeUpdate.do?checkLMS=M",
+        url : "/RIS0102E00UpdateData.do?checkLMS=M",
         data : authok,
         error : function(){
           alert(i18n.message_045); //"[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -695,7 +712,7 @@
 
       $.ajax({
         type : "post",
-        url : "/RIS0102E00View.do?checkLMS=M&lrgcCd="+lrgc_cd+"&mddlCd="+mddl_cd
+        url : "/RIS0102E00DeleteData.do?checkLMS=M&lrgcCd="+lrgc_cd+"&mddlCd="+mddl_cd
           +"&q_user_id="+q_user_id+"&currdate="+currdate,
         error : function(){
           alert(i18n.message_045); //"[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
@@ -748,12 +765,18 @@
 
         document.regfrm.iud.value = iud;
 
-        var authok = $("form[name='regfrm']").serialize();
+        console.log(iud);
+        var authok = $("form[name='regfrm']").serializeObject();
+        authok = JSON.stringify(authok);
+        console.log(authok);
         if(iud == "I"){
           $.ajax({
             type : "post",
-            url : "/json/code/risCodeInsert.do?checkLMS=M",
+            url : "/RIS0102E00InsertData.do?checkLMS=M",
             data : authok,
+            dataType : "json",
+            contentType : "application/json; charset=UTF-8",
+            async : false,
             error : function(){
               alert(i18n.message_045); //"[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
             },
@@ -773,8 +796,11 @@
         }else if(iud =="U"){
           $.ajax({
             type : "post",
-            url : "/json/code/risCodeUpdate.do?searchstatus=M&checkLMS=M",
+            url : "/RIS0102E00UpdateData.do?searchstatus=M&checkLMS=M",
             data : authok,
+            dataType : "json",
+            contentType : "application/json; charset=UTF-8",
+            async : false,
             error : function(){
               alert(i18n.message_045); //"[전산오류]처리시 오류가 발생하였습니다. 전산실에 문의하세요.!"
             },
