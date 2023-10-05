@@ -14,4 +14,6 @@ public interface Ris0102Mapper {
 	public List<Ris0102DTO> findRis0102List(Map<String, Object> requestMap);
 
 	public Ris0102DTO findRis0102View(Map<String, Object> requestMap);
+
+	public int RIS0102E00DuplicateCheck(Map<String, Object> requestMap);
 }

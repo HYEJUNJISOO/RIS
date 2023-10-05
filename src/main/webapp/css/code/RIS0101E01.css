@@ -406,6 +406,7 @@ ul.twoDepth__menu-items li:first-child{
   box-shadow: none;
 }
 .inquiry__page-flex {
+    padding: 10px;
     width: 100%;
     height: 100%;
 }
@@ -439,6 +440,9 @@ ul.twoDepth__menu-items li:first-child{
 }
 .ml-2{
   margin-left: .5rem!important;
+}
+input:read-only {
+    background: #989898;
 }
 .inquiry__page-flex section.inquiry__result-section {
     margin-top:5px;
@@ -580,6 +584,7 @@ table {
     font-size: 10px;
 }
 .ui-jqgrid-sortable{
+    padding: 10px;
 	height:100%;
 }
 .inquiry__page-flex input[type="text"], .inquiry__page-flex input[type="date"] ,.inquiry__page-flex select {
@@ -840,4 +845,90 @@ textarea {
 	align-items:center;
 	font-size:10px;
 	padding-left: 1rem;
+}
+
+
+.img__btn::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.fontawesome__btn::before {
+    width: 14px;
+    height: 14px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.fontawesome__btn:hover {
+    background-color: #CFE9FF;
+}
+
+.fontawesome__btn:active {
+    color: #fff;
+    background-color: #218ECB;
+}
+
+.fontawesome__btn:active::before {
+    color: #fff;
+}
+
+.detail__btn::before {
+    background-image: url("/images/icons/detail.png");
+}
+
+.insert__btn::before {
+    background-image: url("/images/icons/insert2.png");
+}
+
+.search__btn::before {
+    background-image: url("/images/icons/search2.png");
+}
+
+.search__icon::before {
+    content: "\f002";
+}
+
+.update__icon::before {
+    content: "\f304";
+    color: #218ECB;
+}
+
+.insert__icon::before {
+    content: "\2b";
+    color: #00A932;
+}
+
+.delete__icon::before {
+    content: "\f00d";
+    color: #f00d;
+}
+
+.save__icon::before {
+    content: "\f0c7";
+    color: #218ECB;
+}
+
+.rotate__icon::before {
+    content: "\f2f1";
+    color: #999;
+}
+
+.list__icon::before {
+    content: "\f03a";
+    color: #218ECB;
+}
+
+
+.all__header {
+    min-width: 1200px;
 }

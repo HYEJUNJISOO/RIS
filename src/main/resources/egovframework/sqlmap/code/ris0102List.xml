@@ -37,6 +37,9 @@
 		FROM RIS0102 A
 		WHERE A.LRGC_CD = #{lrgcCd}
 			AND A.HSPT_ID = #{hsptId}
+			<if test='search_mddl_cd != null and search_mddl_cd != ""'>
+			AND (A.MDDL_CD like CONCAT('%',#{search_mddl_cd},'%')  OR A.MDDL_KR_NM like CONCAT('%',#{search_mddl_cd},'%'))
+		  </if>
 			AND A.MDDL_CD != '%'
 		ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
@@ -50,4 +53,14 @@
 			AND A.MDDL_CD != '%'
 		ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
+	
+	<select id="RIS0102E00DuplicateCheck" parameterType="String" resultType="int">
+		SELECT COUNT(1) AS cnt
+		FROM RIS0102 A
+		WHERE A.LRGC_CD = #{lrgcCd}
+			AND A.HSPT_ID = #{hsptId}
+			AND A.MDDL_CD = #{mddlCd}
+	</select>
+	
+	
 </mapper>

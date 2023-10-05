@@ -84,21 +84,21 @@
 							<th colspan="2" scope="row">*대분류코드</th>
 							<td colspan="3">
 								<input type="text" name="lrgc_cd" id="lrgc_cd" value="<c:out value="${result.lrgcCd}"/>" class="txt wx150" maxlength="20"/>
-								<button type="button" class="emphasis__btn ml-2" onclick="duplicateCheck()" style="display: inline-block;">중복확인</button>
+								<button type="button" class="all__btn img__btn search__btn ml-2" onclick="duplicateCheck()" style="display: inline-block;">중복확인</button>
 							</td >
 							</c:when>
 							<c:when test="${checkLMS == 'M'}">
 							<th colspan="2" scope="row">*중분류코드</th>
 								<td colspan="3">
 								<input type="text" name="mddl_cd" id="mddl_cd" value="<c:out value="${result.mddlCd}"/>" class="txt wx150" maxlength="20"/>
-								<button type="button" class="emphasis__btn ml-2" onclick="duplicateCheck()" style="display: inline-block;">중복확인</button>
+								<button type="button" class="all__btn img__btn search__btn ml-2" onclick="duplicateCheck()" style="display: inline-block;">중복확인</button>
 								</td >
 							</c:when>
 							<c:otherwise>
 							<th colspan="2" scope="row">*소분류코드</th>
 								<td colspan="3">
 								<input type="text" name="smll_cd" id="smll_cd" value="<c:out value="${result.smllCd}"/>" class="txt wx150" maxlength="20"/>
-								<button type="button" class="emphasis__btn ml-2" onclick="duplicateCheck()" style="display: inline-block;">중복확인</button>
+								<button type="button" class="all__btn img__btn search__btn ml-2" onclick="duplicateCheck()" style="display: inline-block;">중복확인</button>
 								</td >
 							</c:otherwise>
 						</c:choose>
