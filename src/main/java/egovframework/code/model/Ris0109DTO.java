@@ -1,13 +1,10 @@
 package egovframework.code.model;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
-
-import javax.validation.constraints.Size;
-
-import org.springmodules.validation.bean.conf.loader.annotation.handler.NotBlank;
 
 import lombok.*;
+import org.springmodules.validation.bean.conf.loader.annotation.handler.NotBlank;
+
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,35 +13,29 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Ris0103DTO {
+public class Ris0109DTO {
 	@NotBlank
 	@Size(max = 20)
 	private String hsptId; 
 	@NotBlank
 	@Size(max = 20)
 	private String lrgcCd;
-	@NotBlank
-	@Size(max = 20)
-	private String mddlCd;
-	@NotBlank
-	@Size(max = 20)
-	private String smllCd;
-	private String smllKrNm;
-	private String smllEnglNm;
-	private String smllAbbrNm;
-	private Integer otptSqnc;
-	private String applDate;
-	private String exprDate;
-	private String chrc1;
-	private String chrc2;
-	private String chrc3;
-	private String chrc4;
-	private String chrc5;
-	private String nmbr1;
-	private String nmbr2;
-	private String nmbr3;
-	private String nmbr4;
-	private String nmbr5;
+	private String clmnNm;
+	private String applKrNm;
+	private String applEnglNm;
+	private String clmnApplDvsn;
+	private String iputNm1;
+	private String iputNm2;
+	private String iputNm3;
+	private String iputNm4;
+	private String iputNm5;
+	private String iputVlue1;
+	private String iputVlue2;
+	private String iputVlue3;
+	private String iputVlue4;
+	private String iputVlue5;
+	private String elctLrgcCd;
+	private String rqrdYn;
 	private String rgstId;
 	private LocalDateTime rgstDttm;
 	private String mdfcId;

@@ -1,9 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.code.mapper.Ris0109Mapper">
-	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0103DTO">
-		SELECT *
-            FROM RIS0109
-          WHERE 1=1
+	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0109DTO">
+			SELECT *
+				FROM RIS0109
+			WHERE 1=1
+				AND HSPT_ID = #{hspt_id}
+				AND LRGC_CD = #{lrgc_cd}
 	</select>
+	
+	<!--대분류 등록-->
+	<insert id="insertRis0109Data" parameterType="java.util.Map" >
+		INSERT INTO RIS0109(
+				HSPT_ID
+			, LRGC_CD
+			, CLMN_NM
+			, APPL_KR_NM
+			, APPL_ENGL_NM
+			, CLMN_APPL_DVSN
+			, IPUT_NM1
+			, IPUT_NM2
+			, IPUT_NM3
+			, IPUT_NM4
+			, IPUT_NM5
+			, IPUT_VLUE1
+			, IPUT_VLUE2
+			, IPUT_VLUE3
+			, IPUT_VLUE4
+			, IPUT_VLUE5
+			, ELCT_LRGC_CD
+			, RQRD_YN
+			, RGST_ID
+			, RGST_DTTM
+		)
+		VALUES(
+			#{hspt_id}
+		, #{lrgc_cd}
+		, #{clmn_nm}
+		, #{appl_kr_nm}
+		, #{appl_engl_nm}
+		, #{clmn_appl_dvsn}
+		, #{input_nm1}
+		, #{input_nm2}
+		, #{input_nm3}
+		, #{input_nm4}
+		, #{input_nm5}
+		, #{input_vlue1}
+		, #{input_vlue2}
+		, #{input_vlue3}
+		, #{input_vlue4}
+		, #{input_vlue5}
+		, #{elct_lrgc_cd}
+		, #{rqrd_yn}
+		, 'admin'
+		, sysdate()
+		)
+	</insert>
+	
+	<!--대분류코드 수정-->
+	<update id="updateRis0109Data">
+		UPDATE  RIS0109 SET
+		<if test='appl_kr_nm != null'>APPL_KR_NM = #{appl_kr_nm},</if>
+		<if test='appl_engl_nm != null'>APPL_ENGL_NM = #{appl_engl_nm},</if>
+		<if test='clmn_appl_dvsn != null'>CLMN_APPL_DVSN = #{clmn_appl_dvsn},</if>
+		<if test='iput_nm1 != null'>IPUT_NM1 = #{iput_nm1},</if>
+		<if test='iput_nm2 != null'>IPUT_NM2 = #{iput_nm2},</if>
+		<if test='iput_nm3 != null'>IPUT_NM3 = #{iput_nm3},</if>
+		<if test='iput_nm4 != null'>IPUT_NM4 = #{iput_nm4},</if>
+		<if test='iput_nm5 != null'>IPUT_NM5 = #{iput_nm5},</if>
+		<if test='iput_vlue1 != null'>IPUT_VLUE1 = #{iput_vlue1},</if>
+		<if test='iput_vlue2 != null'>IPUT_VLUE2 = #{iput_vlue2},</if>
+		<if test='iput_vlue3 != null'>IPUT_VLUE3 = #{iput_vlue3},</if>
+		<if test='iput_vlue4 != null'>IPUT_VLUE4 = #{iput_vlue4},</if>
+		<if test='iput_vlue5 != null'>IPUT_VLUE5 = #{iput_vlue5},</if>
+		<if test='elct_lrgc_cd != null'>ELCT_LRGC_CD = #{elct_lrgc_cd},</if>
+		<if test='rqrd_yn != null'>RQRD_YN = #{rqrd_yn},</if>
+		MDFC_ID = #{mdfc_id},
+		MDFC_DTTM = sysdate()
+		WHERE  HSPT_ID = #{hspt_id}
+			AND	 LRGC_CD = #{lrgc_cd}
+			AND	 CLMN_NM = #{clmn_nm}
+	</update>
+	
+	<!--대분류코드 삭제-->
+	<delete id="deleteRis0109Data">
+		DELETE
+		FROM  RIS0109
+		WHERE  HSPT_ID = #{hspt_id}
+			AND	 LRGC_CD = #{lrgc_cd}
+	</delete>
 </mapper>

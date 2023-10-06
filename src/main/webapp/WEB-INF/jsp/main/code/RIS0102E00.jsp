@@ -611,6 +611,17 @@
       }
       document.regfrm.iud.value = "D";
 
+      var currentDate = new Date();
+      // 날짜를 특정 포맷으로 변경 (여기서는 YYYY-MM-DD HH:MM:SS)
+      var formattedDate = currentDate.getFullYear() + '-' +
+        addZero((currentDate.getMonth() + 1)) + '-' +
+        addZero(currentDate.getDate());
+      console.log('현재 날짜:', formattedDate);
+      function addZero(num) {
+        return (num < 10 ? '0' : '') + num;
+      }
+      document.regfrm.expr_date.value = formattedDate;
+
       var authok = $("form[name='regfrm']").serializeObject();
       authok = JSON.stringify(authok);
       $.ajax({
