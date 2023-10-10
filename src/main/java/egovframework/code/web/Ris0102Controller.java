@@ -71,7 +71,6 @@ public class Ris0102Controller {
 		JSONObject json = new JSONObject();
 		Ris0102DTO list = ris0102Service.findRis0102View(requestMap); // 중분류 코드 리스트 데이터
 		json.put("rows", list);
-		System.out.println("list :::"+list);
 
 		return json;
 	}
@@ -104,7 +103,7 @@ public class Ris0102Controller {
 		json.put("result", "true");
 		int result = 0;
 		System.out.println("checkLMS :::"+checkLMS);
-		if("M".equals(checkLMS) && "U".equals(requestMap.get("iud"))){
+		if("M".equals(checkLMS) && "U".equals(requestMap.get("iud")) || "D".equals(requestMap.get("iud"))){
 			result = ris0101Service.updateRis0102Data(requestMap);
 		}
 		json.put("error_code", 0);

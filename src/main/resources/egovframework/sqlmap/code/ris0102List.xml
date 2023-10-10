@@ -40,6 +40,12 @@
 			<if test='search_mddl_cd != null and search_mddl_cd != ""'>
 			AND (A.MDDL_CD like CONCAT('%',#{search_mddl_cd},'%')  OR A.MDDL_KR_NM like CONCAT('%',#{search_mddl_cd},'%'))
 		  </if>
+			<if test='use_yn != null and use_yn != "" and use_yn == "N" '>
+			AND A.APPL_DATE >= A.EXPR_DATE
+			</if>
+			<if test='use_yn != null and use_yn != "" and use_yn == "Y" '>
+			<![CDATA[ AND A.APPL_DATE < A.EXPR_DATE ]]>
+			</if>
 			AND A.MDDL_CD != '%'
 		ORDER BY HSPT_ID, OTPT_SQNC
 	</select>
