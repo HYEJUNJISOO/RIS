@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.code.mapper.Ris0201Mapper">
 	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0103DTO">
-		SELECT *
+					SELECT *
             FROM RIS0201
           WHERE 1=1
 	</select>
