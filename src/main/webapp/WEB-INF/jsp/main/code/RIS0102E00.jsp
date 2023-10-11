@@ -621,6 +621,7 @@
         return (num < 10 ? '0' : '') + num;
       }
       document.regfrm.expr_date.value = formattedDate;
+      document.regfrm.appl_date.value = formattedDate;
 
       var authok = $("form[name='regfrm']").serializeObject();
       authok = JSON.stringify(authok);
