@@ -6,4 +6,91 @@
             FROM RIS0201
           WHERE 1=1
 	</select>
+	
+	
+	<insert id="insertRis0201Data" parameterType="java.util.Map" >
+		INSERT INTO RIS0201(
+			HSPT_ID
+			, IMGN_CD
+			, IMGN_KR_NM
+			, IMGN_ENGL_NM
+			, IMGN_ABBR_NM
+			, IMGN_DVSN_CD
+			, PRTB_IMGN_YN
+			, IMGN_ROOM_CD
+			, INPT_IMGN_ROOM_CD
+			, IMGN_BDYP_CD
+			, STTS_BDYP_CD
+			, IMGN_DRCT_CD
+			, IMGN_CNT
+			, INFO_FORM_CD
+			, OUTP_APPN_YN
+			, INPT_APPN_YN
+			, ELCT_TRTM_YN
+			, OTPT_SQNC
+			, APPL_DATE
+			, EXPR_DATE
+			, ORDR_CD
+			, RGST_ID
+			, RGST_DTTM
+		)
+		VALUES(
+				#{hspt_id}
+			, #{imgn_cd}
+			, #{imgn_kr_nm}
+			, #{imgn_engl_nm}
+			, #{imgn_abbr_nm}
+			, #{imgn_dvsn_cd}
+			, #{prtb_imgn_yn}
+			, #{imgn_room_cd}
+			, #{inpt_imgn_room_cd}
+			, #{imgn_bdyp_cd}
+			, #{stts_bdyp_cd}
+			, #{imgn_drct_cd}
+			, #{imgn_cnt}
+			, #{info_form_cd}
+			, #{outp_appn_yn}
+			, #{inpt_appn_yn}
+			, #{elct_trtm_yn}
+			, #{otpt_sqnc}
+			, #{expr_date}
+			, #{ordr_cd}
+			, 'admin'
+			, sysdate()
+		)
+	</insert>
+	
+	<update id="updateRis0101Data">
+		UPDATE  RIS0201 SET
+		<if test='imgn_cd != null'>IMGN_CD = #{imgn_cd},</if>
+		<if test='imgn_kr_nm != null'>IMGN_KR_NM = #{imgn_kr_nm},</if>
+		<if test='imgn_engl_nm != null'>IMGN_ENGL_NM = #{imgn_engl_nm},</if>
+		<if test='imgn_abbr_nm != null'>IMGN_ABBR_NM = #{imgn_abbr_nm},</if>
+		<if test='imgn_dvsn_cd != null'>IMGN_DVSN_CD = #{imgn_dvsn_cd},</if>
+		<if test='prtb_imgn_yn != null'>PRTB_IMGN_YN = #{prtb_imgn_yn},</if>
+		<if test='imgn_room_cd != null'>IMGN_ROOM_CD = #{imgn_room_cd},</if>
+		<if test='inpt_imgn_room_cd != null'>INPT_IMGN_ROOM_CD = #{inpt_imgn_room_cd},</if>
+		<if test='imgn_bdyp_cd != null'>IMGN_BDYP_CD = #{imgn_bdyp_cd},</if>
+		<if test='stts_bdyp_cd != null'>STTS_BDYP_CD = #{stts_bdyp_cd},</if>
+		<if test='imgn_drct_cd != null'>IMGN_DRCT_CD = #{imgn_drct_cd},</if>
+		<if test='imgn_cnt != null'>IMGN_CNT = #{imgn_cnt},</if>
+		<if test='info_form_cd != null'>INFO_FORM_CD = #{info_form_cd},</if>
+		<if test='outp_appn_yn != null'>OUTP_APPN_YN = #{outp_appn_yn},</if>
+		<if test='inpt_appn_yn != null'>INPT_APPN_YN = #{inpt_appn_yn},</if>
+		<if test='elct_trtm_yn != null'>ELCT_TRTM_YN = #{elct_trtm_yn},</if>
+		<if test='otpt_sqnc != null'>OTPT_SQNC = #{otpt_sqnc},</if>
+		<if test='expr_date != null'>EXPR_DATE = #{expr_date},</if>
+		<if test='ordr_cd != null'>ORDR_CD = #{ordr_cd},</if>
+		MDFC_ID = #{mdfc_id},
+		MDFC_DTTM = sysdate()
+		WHERE  IMGN_CD = #{imgn_cd}
+	</update>
+	
+	<delete id="deleteRis0101Data">
+		DELETE
+		FROM  RIS0201
+		WHERE  IMGN_CD = #{imgn_cd}
+	</delete>
+	
+	
 </mapper>
