@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.code.mapper.Ris0201Mapper">
-	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0103DTO">
+	<select id="findListAll" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0201DTO">
 					SELECT *
             FROM RIS0201
           WHERE 1=1
 	</select>
 	
-	
+	<select id="findRis0201One" parameterType="java.util.Map" resultType="egovframework.code.model.Ris0201DTO" >
+		SELECT *
+		FROM RIS0201 A
+		WHERE A.LRGC_CD = #{lrgc_cd}
+			AND A.HSPT_ID = #{hspt_id}
+		ORDER BY HSPT_ID, OTPT_SQNC
+	</select>
+
 	<insert id="insertRis0201Data" parameterType="java.util.Map" >
 		INSERT INTO RIS0201(
 			HSPT_ID
@@ -60,7 +67,7 @@
 		)
 	</insert>
 	
-	<update id="updateRis0101Data">
+	<update id="updateRis0201Data">
 		UPDATE  RIS0201 SET
 		<if test='imgn_cd != null'>IMGN_CD = #{imgn_cd},</if>
 		<if test='imgn_kr_nm != null'>IMGN_KR_NM = #{imgn_kr_nm},</if>
@@ -86,7 +93,7 @@
 		WHERE  IMGN_CD = #{imgn_cd}
 	</update>
 	
-	<delete id="deleteRis0101Data">
+	<delete id="deleteRis0201Data">
 		DELETE
 		FROM  RIS0201
 		WHERE  IMGN_CD = #{imgn_cd}

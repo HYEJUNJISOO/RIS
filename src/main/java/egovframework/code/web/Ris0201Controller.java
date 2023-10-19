@@ -3,6 +3,7 @@ package egovframework.code.web;
 import egovframework.code.model.Ris0101DTO;
 import egovframework.code.model.Ris0102DTO;
 import egovframework.code.model.Ris0103DTO;
+import egovframework.code.model.Ris0201DTO;
 import egovframework.code.service.Ris0101Service;
 import egovframework.code.service.Ris0102Service;
 import egovframework.code.service.Ris0103Service;
@@ -46,10 +47,10 @@ public class Ris0201Controller {
 		requestMap.put("hsptId",hsptId);
 		requestMap.put("lrgcCd",lrgcCd);
 
-		System.out.println("RIS0102E00List requestMap :::"+requestMap);
+		System.out.println("RIS0201E00List requestMap :::"+requestMap);
 
 		JSONObject json = new JSONObject();
-		List<Ris0102DTO> list = ris0102Service.findRis0102List(requestMap); // 중분류 코드 리스트 데이터
+		List<Ris0201DTO> list = ris0201Service.findAll(requestMap); // 중분류 코드 리스트 데이터
 		json.put("rows", list);
 		return json;
 	}
@@ -66,7 +67,7 @@ public class Ris0201Controller {
 		json.put("result", "true");
 		int result = 0;
 		if("M".equals(checkLMS) && "I".equals(requestMap.get("iud"))){
-			result = ris0101Service.insertRis0102Data(requestMap);
+			result = ris0201Service.insertRis0201Data(requestMap);
 		}
 		json.put("error_code", 0);
 		return json;
@@ -84,7 +85,7 @@ public class Ris0201Controller {
 		int result = 0;
 		System.out.println("checkLMS :::"+checkLMS);
 		if("M".equals(checkLMS) && "U".equals(requestMap.get("iud")) || "D".equals(requestMap.get("iud"))){
-			result = ris0101Service.updateRis0102Data(requestMap);
+			result = ris0201Service.updateRis0201Data(requestMap);
 		}
 		json.put("error_code", 0);
 		return json;
@@ -107,7 +108,7 @@ public class Ris0201Controller {
 		json.put("result", "true");
 		int result = 0;
 		if("M".equals(checkLMS)){
-			result = ris0101Service.deleteRis0102Data(requestMap);
+			result = ris0201Service.deleteRis0201Data(requestMap);
 		}
 		json.put("error_code", 0);
 		return json;
