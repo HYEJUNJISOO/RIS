@@ -42,11 +42,11 @@ public class Ris0201Controller {
 	@ResponseBody
 	public JSONObject RIS0201E00List(@RequestParam Map<String, Object> requestMap,
 									 @RequestParam(value="hsptId", required=false, defaultValue="") String hsptId,
-									 @RequestParam(value="lrgcCd", required=false, defaultValue="") String lrgcCd
+									 @RequestParam(value="imgnCd", required=false, defaultValue="") String imgnCd
 	) throws Exception {
 		requestMap.put("hsptId",hsptId);
-		requestMap.put("lrgcCd",lrgcCd);
-
+		requestMap.put("imgnCd",imgnCd);
+		System.out.println("imgnCd :::"+imgnCd);
 		System.out.println("RIS0201E00List requestMap :::"+requestMap);
 
 		JSONObject json = new JSONObject();
@@ -97,12 +97,10 @@ public class Ris0201Controller {
 	public JSONObject RIS0201E00DeleteData(@RequestBody Map<String, Object> requestMap,
 										   @RequestParam(value="checkLMS", required=false, defaultValue="") String checkLMS,
 										   @RequestParam(value="hspt_id", required=false, defaultValue="") String hspt_id,
-										   @RequestParam(value="lrgc_cd", required=false, defaultValue="") String lrgc_cd,
-										   @RequestParam(value="mddl_cd", required=false, defaultValue="") String mddl_cd
+										   @RequestParam(value="imgn_cd", required=false, defaultValue="") String imgn_cd
 	) throws Exception {
 		requestMap.put("hspt_id",hspt_id);
-		requestMap.put("lrgc_cd",lrgc_cd);
-		requestMap.put("mddl_cd",mddl_cd);
+		requestMap.put("imgn_cd",imgn_cd);
 		System.out.println("DELETE requestMap :::"+requestMap);
 		JSONObject json = new JSONObject();
 		json.put("result", "true");
